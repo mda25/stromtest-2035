@@ -1,0 +1,50 @@
+# Snakemake pipeline for stromtest-2035.
+#
+# V0 scaffolding only. Real rules land in build step 6 (single-run pipeline)
+# of docs/design.md, after the PyPSA-Eur reading week (step 2) clarifies the
+# exact extension points and config structure.
+#
+# Planned structure:
+#
+#     rule all:
+#         input:
+#             expand(
+#                 "results/{scenario}/{weather_year}/hourly.parquet",
+#                 scenario=SCENARIOS,
+#                 weather_year=WEATHER_YEARS,
+#             ),
+#             expand(
+#                 "results/{scenario}/{weather_year}/{resolution}.parquet",
+#                 scenario=SCENARIOS,
+#                 weather_year=WEATHER_YEARS,
+#                 resolution=["daily", "weekly"],
+#             )
+#
+#     rule translate_scenario:
+#         input: "scenarios/{scenario}.yml"
+#         output: "generated/{scenario}/pypsa_eur_config.yaml"
+#         shell: "uv run stromtest translate {input} {output}"
+#
+#     rule solve:
+#         input:
+#             config = "generated/{scenario}/pypsa_eur_config.yaml",
+#             weather = "weather_years/{weather_year}.yml",
+#         output: "results/{scenario}/{weather_year}/hourly.parquet"
+#         shell: <PyPSA-Eur snakemake invocation>
+#
+#     rule aggregate:
+#         input: "results/{scenario}/{weather_year}/hourly.parquet"
+#         output:
+#             daily = "results/{scenario}/{weather_year}/daily.parquet",
+#             weekly = "results/{scenario}/{weather_year}/weekly.parquet",
+#         shell: "uv run stromtest aggregate {input} ..."
+#
+# Invalidation strategy (see docs/design.md):
+#   snakemake --rerun-triggers params input
+# with `params: version=...` keyed on the substantive-content hash of each
+# scenario YAML (the patch component does NOT change the hash).
+
+# Placeholder so `snakemake --list` works once the modeling deps are installed.
+rule placeholder:
+    output: touch("results/.placeholder")
+    message: "stromtest pipeline not yet implemented; see docs/design.md Next Steps."

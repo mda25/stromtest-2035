@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs on new pushes to the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  modeling:
+    name: Modeling backend (Python)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: modeling
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.11.14"
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Sync core + dev dependencies
+        run: uv sync --frozen --group dev
+
+      - name: ruff lint
+        run: uv run ruff check .
+
+      - name: ruff format check
+        run: uv run ruff format --check .
+
+      - name: pytest
+        run: uv run pytest -ra
+
+  # Mini end-to-end PyPSA-Eur run. Lands in build step 8 of docs/design.md.
+  # Disabled in V0 scaffolding; will assert checksum of golden baseline run
+  # for one scenario at 2 zones x 168 hours (target <2 min).
+  #
+  # modeling-e2e:
+  #   name: Modeling mini E2E
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: modeling
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv python install 3.11
+  #     - run: uv sync --frozen --group modeling --group dev
+  #     - run: uv run snakemake --use-conda -j 2 mini_e2e
+
+  web:
+    name: Frontend (Next.js)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build

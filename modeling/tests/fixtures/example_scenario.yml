@@ -1,0 +1,76 @@
+# Test fixture only. Do not use as a real scenario. All values are
+# placeholders chosen to validate the schema, not to model reality.
+
+id: test_fixture
+version: "2026-05-17.0"
+display_name: "Test Fixture Scenario"
+description: "Minimal valid scenario used by the test suite. Not for citation."
+authors: [test-author]
+
+sources:
+  - ref: "TEST-REF-1"
+    title: "Test source 1"
+    url: "https://example.invalid/1"
+    date: "2026-05-01"
+  - ref: "TEST-REF-2"
+    title: "Test source 2"
+    url: "https://example.invalid/2"
+
+capacities_2035_gw:
+  wind_onshore:
+    50hertz: 18.0
+    tennet: 22.0
+    amprion: 14.0
+    transnetbw: 4.0
+    citation_ref: "TEST-REF-1"
+  wind_offshore:
+    50hertz: 8.0
+    tennet: 30.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "TEST-REF-1"
+  solar_pv:
+    50hertz: 25.0
+    tennet: 35.0
+    amprion: 60.0
+    transnetbw: 30.0
+    citation_ref: "TEST-REF-1"
+  gas_backup:
+    50hertz: 5.0
+    tennet: 6.0
+    amprion: 8.0
+    transnetbw: 4.0
+    citation_ref: "TEST-REF-2"
+  hydrogen_electrolyzer:
+    50hertz: 2.0
+    tennet: 3.0
+    amprion: 4.0
+    transnetbw: 1.0
+    citation_ref: "TEST-REF-2"
+  hydrogen_storage_twh:
+    value: 75.0
+    citation_ref: "TEST-REF-2"
+  battery_storage_gwh:
+    value: 100.0
+    citation_ref: "TEST-REF-2"
+  pumped_hydro:
+    50hertz: 0.5
+    tennet: 2.0
+    amprion: 1.0
+    transnetbw: 4.5
+    citation_ref: "TEST-REF-1"
+
+demand_2035:
+  baseline_twh: 540.0
+  heat_pump_share: 0.42
+  ev_share_passenger: 0.55
+  electrolyzer_demand_twh: 30.0
+  citation_refs:
+    - "TEST-REF-1"
+    - "TEST-REF-2"
+
+transmission_ntc_gw:
+  50hertz_to_tennet: 12.5
+  tennet_to_amprion: 8.7
+  amprion_to_transnetbw: 5.3
+  amprion_to_50hertz: 6.0

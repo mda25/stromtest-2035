@@ -1,0 +1,87 @@
+# SCHEMA TEMPLATE — do not run, do not cite.
+#
+# This file documents the scenario YAML schema for stromtest-2035. Copy it
+# when authoring a new scenario, fill in real values, and ensure every
+# substantive citation_ref points to an entry in the `sources` list.
+#
+# Validation: `uv run stromtest validate scenarios/{family}/{version}.yml`
+
+id: example                          # scenario family id
+version: "2026-05-17.0"              # YYYY-MM-DD.PATCH
+display_name: "Example Scenario"
+description: |
+  One or two sentences describing the scenario's origin and intent.
+  This text appears in the frontend; keep it neutral and factual.
+authors:
+  - your-handle
+
+sources:
+  - ref: "EXAMPLE-2026-04"
+    title: "Example source title"
+    url: "https://example.invalid/source"
+    date: "2026-04-12"
+
+capacities_2035_gw:
+  wind_onshore:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  wind_offshore:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  solar_pv:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  gas_backup:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  hydrogen_electrolyzer:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  hydrogen_storage_twh:
+    value: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  battery_storage_gwh:
+    value: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+  pumped_hydro:
+    50hertz: 0.0
+    tennet: 0.0
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "EXAMPLE-2026-04"
+
+demand_2035:
+  baseline_twh: 1.0
+  heat_pump_share: 0.0
+  ev_share_passenger: 0.0
+  electrolyzer_demand_twh: 0.0
+  citation_refs:
+    - "EXAMPLE-2026-04"
+
+# Inter-zone NTC values (GW) keyed by "<from>_to_<to>". Sourced from BNetzA
+# Monitoring reports; document the report version and date in sources above.
+transmission_ntc_gw:
+  50hertz_to_tennet: 0.0
+  tennet_to_amprion: 0.0
+  amprion_to_transnetbw: 0.0
+  amprion_to_50hertz: 0.0
+
+# Optional: link to predecessor / successor when this scenario supersedes
+# an earlier version of the same family.
+# supersedes: "2026-04-01.0"
+# superseded_by: null

@@ -1,0 +1,38 @@
+# stromtest-2035 scenario index.
+#
+# Each entry below points to a scenario family directory. Files inside a family
+# directory are versioned as YYYY-MM-DD.PATCH.yml; the most recent version of
+# each family is considered "current" unless explicitly superseded.
+#
+# Real scenarios get authored in build step 4 (see docs/design.md). For now the
+# directories exist but are empty. The _template.yml at this level documents
+# the schema for new scenarios.
+
+families:
+  - id: reiche
+    display_name: "Reiche-Bundesregierung Plan"
+    description: |
+      Translation of BMWK statements, Kraftwerksstrategie, and
+      Koalitionsvertrag positions under the Reiche-led Bundesministerium.
+    directory: reiche/
+
+  - id: habeck
+    display_name: "Habeck-Era Klimaneutralität 2045"
+    description: |
+      Trajectory implied by the previous BMWK leadership, anchored on the
+      Langfristszenarien and the Klimaneutralität-2045 target.
+    directory: habeck/
+
+  - id: agora
+    display_name: "Agora Energiewende — Klimaneutral 2035"
+    description: |
+      Agora Energiewende's published optimistic scenario for an earlier
+      climate-neutral target.
+    directory: agora/
+
+  - id: nep
+    display_name: "Netzentwicklungsplan 2037 Szenario B"
+    description: |
+      Official ÜNB grid-planning scenario approved by BNetzA. The
+      methodologically conservative reference point.
+    directory: nep/
