@@ -11,6 +11,7 @@ from pathlib import Path
 
 import click
 
+from stromtest.apply import apply_translation
 from stromtest.translation.schema import Scenario
 from stromtest.translation.translate import translate as do_translate
 
@@ -60,6 +61,46 @@ def translate(scenario_path: Path, output_dir: Path, weather_year: int | None) -
     click.echo(
         f"OK: {scenario.id} {scenario.version} -> {result.output_dir} (hash {result.version_hash})"
     )
+
+
+@main.command()
+@click.argument("translation_dir", type=click.Path(exists=True, path_type=Path))
+@click.argument("pypsa_eur_dir", type=click.Path(exists=True, path_type=Path))
+@click.option(
+    "--clusters",
+    type=int,
+    default=4,
+    show_default=True,
+    help="Cluster count the busmap targets. Default 4 (our four ÜNB zones).",
+)
+@click.option(
+    "--base-network",
+    default="entsoegridkit",
+    show_default=True,
+    help="PyPSA-Eur base_network mode. Sets the busmap target filename.",
+)
+def apply(
+    translation_dir: Path,
+    pypsa_eur_dir: Path,
+    clusters: int,
+    base_network: str,
+) -> None:
+    """Apply a translation-output bundle to a PyPSA-Eur tree.
+
+    Writes config.yaml, base_s_{clusters}_{base_network}.csv busmap, and
+    drops capacities.json + manifest.json under .stromtest/ for provenance.
+    """
+    result = apply_translation(
+        translation_dir,
+        pypsa_eur_dir,
+        clusters=clusters,
+        base_network=base_network,
+    )
+    click.echo(f"OK: applied {translation_dir} to {result.pypsa_eur_dir}")
+    click.echo(f"  config:    {result.config_yaml_path}")
+    click.echo(f"  busmap:    {result.busmap_path}")
+    click.echo(f"  capacities: {result.capacities_json_path}")
+    click.echo(f"  manifest:  {result.manifest_path}")
 
 
 if __name__ == "__main__":
