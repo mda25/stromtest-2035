@@ -48,6 +48,13 @@ dev = [
     "mypy>=1.10",
 ]
 
+# Activate with: uv sync --group busmap-gen
+# Required only when (re)generating modeling/busmap/unb_busmap.csv.
+# The CSV is committed; this group is for re-running the generator.
+busmap-gen = [
+    "shapely>=2.0",
+]
+
 [tool.uv]
 default-groups = ["dev"]
 

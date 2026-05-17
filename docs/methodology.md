@@ -72,11 +72,24 @@ CSV at:
 data/busmaps/base_s_{clusters}_{base_network}.csv
 ```
 
-For us with `clusters: 4` and the default OSM base network, that path is:
+For V0 we set `electricity.base_network: entsoegridkit` rather than the
+PyPSA-Eur default `osm`. Reasoning:
+- The entsoegridkit dataset ships pre-built in
+  `pypsa_eur/data/entsoegridkit/buses.csv` (474 German substations at 220
+  and 380 kV).
+- It gives us a deterministic bus list we can author against without
+  triggering ~hours of OSM data downloads.
+- entsoegridkit is the source used by virtually all PyPSA-Eur publications
+  pre-2024, so the methodology is well-trodden.
+
+With `clusters: 4` and `base_network: entsoegridkit`, the path becomes:
 
 ```
-data/busmaps/base_s_4_osm.csv
+data/busmaps/base_s_4_entsoegridkit.csv
 ```
+
+Switching to OSM as a V1 upgrade requires re-authoring the busmap against
+OSM bus IDs (different IDs, different counts).
 
 ### CSV format
 
@@ -123,15 +136,30 @@ network's electrical topology. The resulting clusters are
 electrically-coherent but do NOT respect the ÜNB Regelzonen. Every chart
 caption in our frontend needs to say "TenneT" / "50Hertz" — not "cluster 1".
 
-The work to land in build step 3:
+### V0 status: complete (build step 3)
 
-1. Obtain the bus IDs and coordinates from
-   `pypsa_eur/resources/networks/base_s.nc` (we will run PyPSA-Eur's
-   `base_network` rule once to produce this file, then read it).
-2. Overlay each bus's coordinates against a Bundesland or Regelzone polygon
-   (Regelzonen-Karte from BNetzA or the four ÜNB; available as KML/Shapefile).
-3. Write `data/busmaps/base_s_4_osm.csv` with one row per bus.
-4. Spot-check edge cases manually (border buses, offshore connection points).
+Committed at [`modeling/busmap/unb_busmap.csv`](../modeling/busmap/unb_busmap.csv).
+474 rows covering every German entsoegridkit bus. See
+[`modeling/busmap/README.md`](../modeling/busmap/README.md) for the zone
+distribution and methodology details.
+
+The pipeline-side step (lands with build step 6) will copy/symlink this CSV
+to `pypsa_eur/data/busmaps/base_s_4_entsoegridkit.csv` and subset to whatever
+bus IDs survive PyPSA-Eur's `simplify_network` step. The committed CSV
+deliberately over-covers (one row per raw entsoegridkit bus, including
+multi-voltage substations) so the subset operation is filter, not lookup.
+
+Generator: [`modeling/busmap/generate_busmap.py`](../modeling/busmap/generate_busmap.py).
+Run via `uv sync --group busmap-gen && uv run python busmap/generate_busmap.py`.
+Test: [`modeling/tests/test_busmap.py`](../modeling/tests/test_busmap.py)
+guards against regressions (schema, zone validity, landmark city spot-checks,
+zone distribution shares).
+
+Known V0 limitations are tagged inline in the CSV's `border_warning`
+column (35 buses flagged): the Emsland / western Schleswig-Holstein
+overlaps with Amprion (15 rows) and offshore wind connection points handled
+via nearest-Bundesland fallback (20 rows). Refining these requires finer
+ÜNB-published polygons; deferred to V1.
 
 ## 5. Snapshots and weather years
 
