@@ -1,0 +1,221 @@
+# Reiche-Bundesregierung Plan — Stand 2026-05-17
+#
+# First authored version of the Reiche scenario family. Reflects the
+# energy plan as it stands under the Reiche-led BMWE in mid-2026:
+#   - Up to 20 GW H2-ready gas backup tendered via KWSG (Kraftwerksstrategie
+#     Grundsatzeinigung mit der EU-Kommission, 15 January 2026; 12 GW in
+#     first tender 2026, rest in 2027 + 2029/2030)
+#   - Renewable expansion targets per EEG-2023 and WindSeeG-2023 retained
+#     (115 GW onshore wind by 2030, 40 GW offshore wind by 2035, 215 GW
+#     solar by 2030); 2035 figures interpolated to ~140 GW wind onshore,
+#     ~290 GW solar PV
+#   - Hydrogen ramp pace de-prioritised vs. Habeck-era; electrolyzer scaled
+#     down to ~15 GW total by 2035 vs. ~25-30 GW in Klimaneutral pathways
+#   - Heat pump and EV adoption pace slowed vs. Habeck-era targets
+#
+# Spatial allocation: scaled from current Bundesland-level production
+# (Fraunhofer Windmonitor + AGEE-Stat) using WindBG 2% land-area logic
+# for onshore wind; offshore allocated to landing points in Nds/SH/MV;
+# solar allocated proportionally to current per-zone share with some
+# rebalancing toward southern Bundesländer (Bayern, BW) reflecting their
+# population + roof-area advantage.
+#
+# Confidence markers in inline comments:
+#   [HIGH]   = directly cited from a current published target / law
+#   [MEDIUM] = derived by allocating a national total via spatial proxy
+#   [LOW]    = best-effort estimate where no public per-zone breakdown exists
+
+id: reiche
+version: "2026-05-17.0"
+display_name: "Reiche-Bundesregierung Plan (Stand 2026-05)"
+description: |
+  Translation of the German Bundesregierung's energy plan into runnable
+  2035 capacity, demand, and storage data under the Reiche-led BMWE. Baseline
+  is NEP 2037 V2025 Scenario B; amended on gas backup (Kraftwerksstrategie,
+  Koalitionsvertrag CDU/CSU-SPD 2025), hydrogen pace (slowed vs. Habeck-era
+  NWS Fortschreibung), and demand profile (slower heat pump rollout). Initial
+  draft for stromtest-2035; numbers reviewed but not yet externally validated.
+authors:
+  - matthis-damm
+
+sources:
+  - ref: "EEG-2023"
+    title: "Erneuerbare-Energien-Gesetz 2023, § 4 Ausbaupfade"
+    url: "https://www.gesetze-im-internet.de/eeg_2014/__4.html"
+    date: "2023-01-01"
+  - ref: "WindSeeG-2023"
+    title: "Windenergie-auf-See-Gesetz, § 1 Ausbauziele 30/40/70 GW (2030/2035/2045)"
+    url: "https://www.gesetze-im-internet.de/windseeg/__1.html"
+    date: "2023-01-01"
+  - ref: "KoaV-2025"
+    title: "Koalitionsvertrag CDU/CSU-SPD 2025 — Verantwortung für Deutschland (Energiekapitel)"
+    url: "https://www.cdu.de/app/uploads/2025/04/KoaV-2025-Gesamt-final-0424.pdf"
+    date: "2025-04-09"
+  - ref: "BMWE-Kraftwerksstrategie-2026-01"
+    title: "Grundsatzeinigung mit der Europäischen Kommission über Eckpunkte der Kraftwerksstrategie (Pressemitteilung BMWE)"
+    url: "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Pressemitteilungen/2026/01/20260115-grundsatzeinigung-mit-europaeischen-kommission-ueber-eckpunkte-der-kraftwerksstrategie.html"
+    date: "2026-01-15"
+  - ref: "NEP-2037-V2025"
+    title: "Netzentwicklungsplan Strom 2037 mit Ausblick 2045, Version 2025, 1. Entwurf"
+    url: "https://www.netzentwicklungsplan.de/sites/default/files/2025-12/NEP_2037_2045_V2025_1_Entwurf_0.pdf"
+    date: "2025-12-10"
+  - ref: "NWS-Fortschreibung-2023"
+    title: "Fortschreibung der Nationalen Wasserstoffstrategie, BMWK (10 GW Elektrolyseur bis 2030)"
+    url: "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Publikationen/Energie/fortschreibung-nationale-wasserstoffstrategie.html"
+    date: "2023-07-26"
+  - ref: "Fraunhofer-Windmonitor-2025"
+    title: "Fraunhofer IEE Windmonitor — Ausbaustand der Bundesländer (Stand 2025)"
+    url: "https://windmonitor.iee.fraunhofer.de/windmonitor_de/1_wind-im-strommix/1_energiewende-in-deutschland/6_Ausbaustand_der_Bundeslaender/"
+    date: "2025-06-30"
+  - ref: "FA-Wind-Solar-2025"
+    title: "Fachagentur Wind und Solar — Status des Windenergieausbaus an Land, 1. Halbjahr 2025"
+    url: "https://www.fachagentur-wind-solar.de/fileadmin/Veroeffentlichungen/Wind/Daten/FA_Wind_Solar_Status_des_Windenergieausbaus_an_Land_Halbjahr_2025.pdf"
+    date: "2025-07-15"
+  - ref: "Frontier-BESS-2024"
+    title: "Frontier Economics — Wert von Großbatteriespeichern im deutschen Stromsystem"
+    url: "https://www.frontier-economics.com/media/jmxlrpul/frontier-economics_wert-von-bess-im-deutschen-stromsystem_-final-report.pdf"
+    date: "2024-10-01"
+  - ref: "BMWE-Strommarkt-Reiche-2025"
+    title: "BMWE — Unser Strommarkt für die Energiewende (Dossier mit Reiche-Era-Positionen)"
+    url: "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Dossier/strommarkt-der-zukunft.html"
+    date: "2025-11-01"
+  - ref: "BEE-Strombedarf-2025"
+    title: "BEE — Update der Strombedarfsanalyse (~700 TWh Bruttostromverbrauch 2030, Pfad zu ~750 TWh 2035)"
+    url: "https://www.bee-ev.de/service/publikationen-medien/beitrag/update-der-strombedarfsanalyse"
+    date: "2025-01-20"
+
+# All capacities in GW unless suffixed otherwise. Sums per technology are
+# cross-checked against the cited national targets in CHANGELOG.md.
+capacities_2035_gw:
+
+  # National total ~138 GW. Linear interpolation from EEG 2030 target (115 GW)
+  # to 2040 (160 GW) gives ~137.5 GW; rounded to 138 with allocation reflecting
+  # current production share + WindBG-2% catch-up for southern Bundesländer.
+  # [MEDIUM] per-zone shares derived from Fraunhofer Windmonitor 2025
+  wind_onshore:
+    50hertz: 40.0          # Brandenburg + MV + Sachsen-Anhalt + Sachsen + Thüringen + Berlin
+    tennet: 56.0           # Niedersachsen + Schleswig-Holstein (most) + Bayern + Hessen + Bremen
+    amprion: 28.0          # NRW + RLP + Saarland
+    transnetbw: 14.0       # Baden-Württemberg (catch-up under WindBG 2%)
+    citation_ref: "EEG-2023"
+
+  # National total 40 GW per WindSeeG-2023 § 1 (2035 target). Allocated to
+  # the three coastal Bundesländer that host landing connections.
+  # [HIGH] national total, [MEDIUM] per-zone landing allocation
+  wind_offshore:
+    50hertz: 6.0           # Mecklenburg-Vorpommern (Baltic landings)
+    tennet: 34.0           # Niedersachsen + Schleswig-Holstein (North Sea, ~85% of total)
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "WindSeeG-2023"
+
+  # National total ~292 GW. Linear interpolation between EEG 2030 (215 GW)
+  # and 2040 (400 GW) gives ~307; tightened to ~290 reflecting Reiche-era
+  # tempering of mid-decade incentives. Allocation reflects Bayern + BW
+  # rooftop-PV dominance plus eastern ground-mount potential.
+  # [HIGH] national total, [MEDIUM] per-zone allocation via current shares
+  solar_pv:
+    50hertz: 60.0          # Brandenburg ground-mount + Sachsen/Sachsen-Anhalt + Berlin
+    tennet: 130.0          # Bayern (~95 GW dominant) + Niedersachsen + Hessen
+    amprion: 60.0          # NRW + Rheinland-Pfalz + Saarland
+    transnetbw: 42.0       # Baden-Württemberg
+    citation_ref: "EEG-2023"
+
+  # National total 20 GW per Kraftwerksstrategie-Grundsatzeinigung 2026-01.
+  # Distribution favours south where demand exceeds local generation,
+  # consistent with KWSG site-criteria emphasising netzdienliche Standorte.
+  # [HIGH] national total, [LOW] per-zone allocation (no public breakdown
+  # available; pattern follows demand-vs-supply gap heuristic)
+  gas_backup:
+    50hertz: 3.0
+    tennet: 7.0            # Bayern is the biggest single Stromimport-Bundesland
+    amprion: 6.0           # Industrial NRW + RLP heavy industry
+    transnetbw: 4.0
+    citation_ref: "BMWE-Kraftwerksstrategie-2026-01"
+
+  # ~15 GW national by 2035 — slowed vs. NWS Fortschreibung's 10 GW-by-2030
+  # implied trajectory of 25-30 GW by 2035 in Klimaneutral pathways. Reiche
+  # signal: Wasserstoffhochlauf "behutsamer", colour-open imports preferred
+  # (KoaV-2025). Allocation favours wind-rich zones for surplus capture.
+  # [MEDIUM] national; [LOW] per-zone (no published 2035 breakdown)
+  hydrogen_electrolyzer:
+    50hertz: 4.0           # Eastern wind surplus
+    tennet: 6.0            # Niedersachsen / Schleswig-Holstein offshore + onshore surplus
+    amprion: 3.0           # NRW industrial demand co-location
+    transnetbw: 2.0
+    citation_ref: "NWS-Fortschreibung-2023"
+
+  # National H2 storage need: 40-100 TWh long-term per Langfristszenarien;
+  # Reiche scenario sits at the low end (slower hydrogen ramp). 40 TWh by 2035.
+  # All capacity assumed in northern German salt caverns (geological
+  # constraint); spatial allocation handled in pipeline-side translation, not
+  # encoded as zone split here because schema treats it as a single value.
+  # [MEDIUM] national value
+  hydrogen_storage_twh:
+    value: 40.0
+    citation_ref: "NWS-Fortschreibung-2023"
+
+  # NEP 2037 V2025 Scenario B: 24 GW / 61 GWh large battery storage by 2037.
+  # 2035 interpolated value: ~52 GWh. Includes utility-scale only; behind-
+  # the-meter home batteries modeled implicitly via residual load profile.
+  # [HIGH] from NEP 2037 V2025
+  battery_storage_gwh:
+    value: 52.0
+    citation_ref: "NEP-2037-V2025"
+
+  # Existing capacity ~5.2 GW; minimal expansion planned (geographic
+  # constraints + economics). Allocation reflects known plant locations:
+  # Goldisthal & Markersbach (50Hertz), Schluchsee-complex (TransnetBW),
+  # Waldeck + Erzhausen + Geesthacht (TenneT), small in Amprion.
+  # [HIGH] from current plant inventory; [MEDIUM] minor expansion estimate
+  pumped_hydro:
+    50hertz: 2.1
+    tennet: 1.0
+    amprion: 0.3
+    transnetbw: 1.9
+    citation_ref: "NEP-2037-V2025"
+
+# Demand projection. Reiche scenario sits at the lower-middle of the NEP
+# 2037 V2025 Scenario A/B range (~700 TWh) reflecting slower heat pump
+# uptake and slowed electrolyzer demand vs. Habeck-era pathways.
+demand_2035:
+  # ~700 TWh — between McKinsey Trendpfad (635) and NEP B-upper (~800).
+  # BEE projects 700 TWh by 2030; under Reiche slower pace, 2035 sits at
+  # the same level or modestly higher.
+  # [MEDIUM]
+  baseline_twh: 700.0
+  # ~35% of building heat covered by HP in 2035. Reiche slowed the GEG
+  # mandate; LFS3 T45-Strom assumed 5.2 M HPs by 2030 → ~7-8 M by 2035 →
+  # ~35-40% share. Picked the lower end reflecting policy slowdown.
+  # [MEDIUM]
+  heat_pump_share: 0.35
+  # 50% of passenger fleet electrified by 2035 under Reiche pace. EEG-era
+  # target was 15 M BEVs by 2030 → ~50% of ~50 M passenger cars; slowed
+  # but still substantial.
+  # [MEDIUM]
+  ev_share_passenger: 0.50
+  # 15 GW electrolyzer × ~4500 FLH ≈ 67 TWh electricity for H2 production.
+  # [MEDIUM]
+  electrolyzer_demand_twh: 67.0
+  citation_refs:
+    - "NEP-2037-V2025"
+    - "BEE-Strombedarf-2025"
+    - "NWS-Fortschreibung-2023"
+
+# Inter-ÜNB-zone net transfer capacities. V0 NOTE: these values are
+# informational only and NOT load-bearing for V0 dispatch — the pipeline
+# uses PyPSA-Eur's computed line-sum NTC (sum of physical lines crossing
+# each cluster boundary) per docs/methodology.md §4. Values below
+# approximate current BNetzA Monitoring report figures so the schema is
+# populated; V1 may consume these as overrides.
+transmission_ntc_gw:
+  50hertz_to_tennet: 10.0
+  tennet_to_50hertz: 10.0
+  tennet_to_amprion: 8.0
+  amprion_to_tennet: 8.0
+  amprion_to_50hertz: 5.0
+  50hertz_to_amprion: 5.0
+  amprion_to_transnetbw: 6.0
+  transnetbw_to_amprion: 6.0
+  tennet_to_transnetbw: 4.0
+  transnetbw_to_tennet: 4.0

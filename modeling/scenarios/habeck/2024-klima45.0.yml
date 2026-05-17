@@ -1,0 +1,194 @@
+# Habeck-Era Klimaneutralität 2045 — Stand 2024-09-30
+#
+# Represents the trajectory implied by the previous BMWK leadership under
+# Robert Habeck (Ampel coalition, 2021-2025). Anchored on:
+#   - Klimaschutzgesetz 2021 (Klimaneutralität 2045 target)
+#   - BMWK Langfristszenarien 3 T45-Strom (2023, the Habeck-era reference
+#     pathway, strong direct electrification)
+#   - Original Kraftwerksstrategie (smaller gas backup, ~10 GW, pre-KWSG-3.0)
+#   - NWS Fortschreibung 2023 (10 GW electrolyzer by 2030 → fast ramp)
+#   - EEG-2023 / WindSeeG / Solarpaket I+II
+#
+# Versioned 2024-09-30 to anchor on the policy stack as it stood just
+# before the Ampel collapse (November 2024). Numbers reflect the
+# trajectory that would have been pursued absent the change of government.
+# Provided as a comparison anchor for the Reiche scenario.
+#
+# Confidence markers in inline comments:
+#   [HIGH]   = directly cited from a published target / law
+#   [MEDIUM] = derived from Langfristszenarien T45 or scaled from NEP V2023 B
+#   [LOW]    = best-effort estimate where no public per-zone breakdown exists
+
+id: habeck
+version: "2024-09-30.0"
+display_name: "Habeck-Era Klimaneutralität 2045 (Stand 2024-09)"
+description: |
+  Trajectory implied by the Habeck-led BMWK and the Ampel coalition before
+  its November 2024 collapse. Reference pathway is Langfristszenarien 3
+  T45-Strom with strong direct electrification: faster heat pump rollout,
+  faster EV adoption, higher 2035 electrolyzer capacity, smaller gas backup
+  vs. the later Reiche-era Kraftwerksstrategie. Used as comparison anchor
+  in stromtest-2035; not the currently-operative plan in 2026.
+authors:
+  - matthis-damm
+
+sources:
+  - ref: "KSG-2021"
+    title: "Bundes-Klimaschutzgesetz, § 3 Klimaneutralität bis 2045"
+    url: "https://www.gesetze-im-internet.de/ksg/__3.html"
+    date: "2021-08-31"
+  - ref: "EEG-2023"
+    title: "Erneuerbare-Energien-Gesetz 2023, § 4 Ausbaupfade"
+    url: "https://www.gesetze-im-internet.de/eeg_2014/__4.html"
+    date: "2023-01-01"
+  - ref: "WindSeeG-2023"
+    title: "Windenergie-auf-See-Gesetz, § 1 Ausbauziele 30/40/70 GW (2030/2035/2045)"
+    url: "https://www.gesetze-im-internet.de/windseeg/__1.html"
+    date: "2023-01-01"
+  - ref: "LFS3-T45-Strom"
+    title: "BMWK Langfristszenarien 3, T45-Strom — Treibhausgasneutrales Strom-Pfad (Fraunhofer ISI + Consentec + ifeu + TU Berlin)"
+    url: "https://langfristszenarien.de/enertile-explorer-wAssets/docs/LFS3_T45_StromStern_Energieangebot.pdf"
+    date: "2023-04-01"
+  - ref: "BMWK-LFS3-Overview"
+    title: "BMWK — Neue Langfristszenarien für die Energiewende (Vorstellung LFS3)"
+    url: "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Schlaglichter-der-Wirtschaftspolitik/2024/04/05-neue-langfristszenarien-fuer-die-energiewende.html"
+    date: "2024-04-05"
+  - ref: "NWS-Fortschreibung-2023"
+    title: "Fortschreibung der Nationalen Wasserstoffstrategie, BMWK (10 GW Elektrolyseur bis 2030)"
+    url: "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Publikationen/Energie/fortschreibung-nationale-wasserstoffstrategie.html"
+    date: "2023-07-26"
+  - ref: "NEP-2037-V2023"
+    title: "Netzentwicklungsplan Strom 2037 mit Ausblick 2045, Version 2023, 2. Entwurf"
+    url: "https://www.netzentwicklungsplan.de/sites/default/files/2023-12/NEP%20kompakt_2037_2045_V2023_2E.pdf"
+    date: "2023-12-01"
+  - ref: "Agora-KNStrom2035"
+    title: "Agora Energiewende — Klimaneutrales Stromsystem 2035 (Studie 264)"
+    url: "https://www.agora-energiewende.de/fileadmin/Projekte/2021/2021_11_DE_KNStrom2035/A-EW_264_KNStrom2035_WEB.pdf"
+    date: "2021-11-15"
+  - ref: "Fraunhofer-Windmonitor-2024"
+    title: "Fraunhofer IEE Windmonitor — Ausbaustand der Bundesländer (Stand 2024)"
+    url: "https://windmonitor.iee.fraunhofer.de/windmonitor_de/1_wind-im-strommix/1_energiewende-in-deutschland/6_Ausbaustand_der_Bundeslaender/"
+    date: "2024-12-31"
+  - ref: "Frontier-BESS-2024"
+    title: "Frontier Economics — Wert von Großbatteriespeichern im deutschen Stromsystem"
+    url: "https://www.frontier-economics.com/media/jmxlrpul/frontier-economics_wert-von-bess-im-deutschen-stromsystem_-final-report.pdf"
+    date: "2024-10-01"
+
+capacities_2035_gw:
+
+  # ~145 GW national, sits above EEG 2030 (115) and below 2040 (160).
+  # LFS3 T45-Strom assumes accelerated WindBG implementation with strong
+  # southern catch-up.
+  # [MEDIUM] per-zone shares derived from Windmonitor 2024 + accelerated
+  # southern allocation under T45 trajectory
+  wind_onshore:
+    50hertz: 42.0          # Brandenburg + MV + Sa/SAn/Th + Berlin (strong eastern wind)
+    tennet: 58.0           # Niedersachsen + SH + Bayern (accelerated) + Hessen + Bremen
+    amprion: 30.0          # NRW + RLP + Saarland
+    transnetbw: 15.0       # Baden-Württemberg under WindBG 2% catch-up
+    citation_ref: "LFS3-T45-Strom"
+
+  # 40 GW law (WindSeeG § 1) — same as Reiche, as this is statutory.
+  # [HIGH] national total, [MEDIUM] per-zone landing allocation
+  wind_offshore:
+    50hertz: 6.0           # Mecklenburg-Vorpommern (Baltic landings)
+    tennet: 34.0           # Niedersachsen + Schleswig-Holstein (North Sea)
+    amprion: 0.0
+    transnetbw: 0.0
+    citation_ref: "WindSeeG-2023"
+
+  # ~325 GW national. LFS3 T45-Strom: from 2030 onward +30 GW/year, giving
+  # 215+150 = 365 GW by 2035. Tightened to 325 reflecting a conservative
+  # reading of LFS3 build-rate assumptions vs. EEG-2023 floor.
+  # [MEDIUM] national from LFS3; [MEDIUM] per-zone from current shares
+  solar_pv:
+    50hertz: 68.0          # Brandenburg ground-mount strong, Sa/SAn growing
+    tennet: 145.0          # Bayern (~110 GW share), Niedersachsen, Hessen
+    amprion: 67.0          # NRW + RLP + Saar
+    transnetbw: 45.0       # Baden-Württemberg
+    citation_ref: "LFS3-T45-Strom"
+
+  # ~10 GW national — the pre-KWSG-3.0 Habeck-era Kraftwerksstrategie. The
+  # Ampel had announced ~8-10 GW H2-ready gas (Eckpunkte Juli 2023) but
+  # implementation stalled. T45 pathway uses gas mostly for spitzenlast.
+  # [MEDIUM] national; [LOW] per-zone allocation pattern
+  gas_backup:
+    50hertz: 1.5
+    tennet: 3.5
+    amprion: 3.0
+    transnetbw: 2.0
+    citation_ref: "LFS3-T45-Strom"
+
+  # ~28 GW national. NWS Fortschreibung: 10 GW by 2030; T45 pathway accelerates
+  # to ~30 GW by 2035 then 80 GW by 2045 per NEP B 2045. Allocation favours
+  # wind-surplus zones plus NRW industrial co-location.
+  # [MEDIUM] national; [LOW] per-zone allocation
+  hydrogen_electrolyzer:
+    50hertz: 8.0
+    tennet: 11.0
+    amprion: 6.0
+    transnetbw: 3.0
+    citation_ref: "NWS-Fortschreibung-2023"
+
+  # ~60 TWh national. LFS3 T45 indicates 70-100 TWh long-term need; the
+  # 2035 milestone sits at ~60 TWh reflecting partial cavern build-out.
+  # [MEDIUM] national value
+  hydrogen_storage_twh:
+    value: 60.0
+    citation_ref: "LFS3-T45-Strom"
+
+  # ~80 GWh national. T45 pathway needs more flex than NEP 2037 V2025 B
+  # because it has less gas backup; battery + DSM fills the gap. Scaled up
+  # from NEP B 2037 (61 GWh) by ~30%.
+  # [MEDIUM] national value
+  battery_storage_gwh:
+    value: 80.0
+    citation_ref: "Agora-KNStrom2035"
+
+  # Same baseline as Reiche — pumped hydro stock is geography-limited and
+  # almost identical across scenarios. Existing ~5.2 GW + tiny repowering.
+  # [HIGH] from current plant inventory
+  pumped_hydro:
+    50hertz: 2.1
+    tennet: 1.0
+    amprion: 0.3
+    transnetbw: 1.9
+    citation_ref: "NEP-2037-V2023"
+
+# Habeck-era demand: full electrification pathway under T45.
+demand_2035:
+  # ~780 TWh — sits between NEP 2037 B (~700) and high-electrification
+  # variants (~800-1000). Reflects faster heat pump + EV rollout +
+  # accelerated electrolyzer demand.
+  # [MEDIUM]
+  baseline_twh: 780.0
+  # ~55% of building heat from HPs by 2035. LFS3 T45 assumes 5.2 M HPs by
+  # 2030 (+2 M hybrids) → ~10-11 M by 2035 → 55% share.
+  # [MEDIUM]
+  heat_pump_share: 0.55
+  # ~70% of passenger fleet electrified by 2035. Ampel's 15 M BEV-by-2030
+  # target implied ~70% share by 2035.
+  # [MEDIUM]
+  ev_share_passenger: 0.70
+  # 28 GW electrolyzer × ~4500 FLH ≈ 126 TWh electricity for H2 production.
+  # [MEDIUM]
+  electrolyzer_demand_twh: 126.0
+  citation_refs:
+    - "LFS3-T45-Strom"
+    - "NWS-Fortschreibung-2023"
+    - "BMWK-LFS3-Overview"
+
+# Inter-ÜNB-zone NTC values. As in the Reiche scenario, these are
+# informational only and NOT load-bearing for V0 dispatch per
+# docs/methodology.md §4 (PyPSA-Eur computes its own line-sum NTCs).
+transmission_ntc_gw:
+  50hertz_to_tennet: 10.0
+  tennet_to_50hertz: 10.0
+  tennet_to_amprion: 8.0
+  amprion_to_tennet: 8.0
+  amprion_to_50hertz: 5.0
+  50hertz_to_amprion: 5.0
+  amprion_to_transnetbw: 6.0
+  transnetbw_to_amprion: 6.0
+  tennet_to_transnetbw: 4.0
+  transnetbw_to_tennet: 4.0
