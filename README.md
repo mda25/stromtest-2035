@@ -4,7 +4,22 @@
 
 `stromtest-2035` translates published energy-transition plans (Reiche-Bundesregierung, Habeck-era, Agora, NEP) into runnable scenarios, then stress-tests each plan against historical weather years using [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur). The result is a public, citable case-study tool that shows what each plan delivers when the wind stops in February.
 
-**Status:** early scaffolding. Not yet usable. See [docs/design.md](docs/design.md) for the full design and [docs/methodology.md](docs/methodology.md) for the modeling approach (in progress).
+**Status:** scaffolding + first real scenarios committed. PyPSA-Eur pipeline validated on a Belgium tutorial; per-zone capacity injection (build step 7) is the next piece. See [docs/design.md](docs/design.md) for the full design and [docs/methodology.md](docs/methodology.md) for the modeling approach (in progress).
+
+## Frontend (local)
+
+```bash
+cd web
+npm install
+npm run dev
+# open http://localhost:3000/scenarios
+```
+
+Three pages render the committed scenarios from the source YAMLs:
+
+- `/scenarios` — list of all families
+- `/scenarios/[family]` — per-zone capacities, demand, cited sources, changelog
+- `/scenarios/compare` — side-by-side numerical comparison
 
 ## Why
 
@@ -38,18 +53,25 @@ Germany's energy plans are evolving in real time under the current Bundesregieru
 
 ## Quick start
 
-> Not usable yet; see `docs/design.md` Next Steps for build order.
-
 ```bash
-# Modeling backend
+# Modeling backend (Python, fast tests, no PyPSA-Eur deps)
 cd modeling
-uv sync
-uv run pytest
+uv sync                          # core + dev install
+uv run pytest                    # 91 tests pass; 1 skipped (modeling-only)
+uv run stromtest validate scenarios/reiche/2026-05-17.0.yml
 
-# Frontend
-cd web
+# Translate a scenario into PyPSA-Eur artifacts
+uv run stromtest translate scenarios/reiche/2026-05-17.0.yml /tmp/reiche-bundle --weather-year 2010
+
+# Apply that bundle to a PyPSA-Eur clone (see modeling/RUNBOOK.md for the full
+# pixi-based pipeline run)
+uv run stromtest apply /tmp/reiche-bundle pypsa_eur/
+
+# Frontend (Next.js, reads scenarios at build time)
+cd ../web
 npm install
 npm run dev
+# http://localhost:3000/scenarios
 ```
 
 ## Methodology

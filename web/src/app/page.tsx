@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -38,13 +39,25 @@ export default function Home() {
         <CardHeader>
           <CardTitle>Status</CardTitle>
           <CardDescription>
-            Repository scaffolded; modeling backend and frontend boilerplate in
-            place. Real scenarios, PyPSA-Eur integration, and result views land
-            over the next build steps. See{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-sm">docs/design.md</code>{" "}
-            for the full plan.
+            Two scenarios committed (Reiche-Bundesregierung 2026-05 + Habeck-era
+            Klimaneutralität 2045) with every substantive number citation-disciplined.
+            PyPSA-Eur pipeline validated end-to-end. Dispatch results land once
+            the per-zone capacity injection (build step 7) ships.
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <Link href="/scenarios" className="underline underline-offset-4">
+              Browse scenarios →
+            </Link>
+            <Link
+              href="/scenarios/compare"
+              className="underline underline-offset-4"
+            >
+              Side-by-side comparison →
+            </Link>
+          </div>
+        </CardContent>
       </Card>
 
       <Card>

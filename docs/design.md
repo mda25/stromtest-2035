@@ -13,6 +13,9 @@ Working title: *Energiewende Stress Tester* (final name `stromtest-2035`)
 - [x] Step 4 — Scenarios (Reiche-2026-05 + Habeck-2024-09, web-researched + cited)
 - [x] Step 5 — Translation layer (`stromtest.translation.translate` + `stromtest translate` CLI)
 - [x] Step 6 (partial) — PyPSA-Eur env installed (pixi); BE-tutorial pipeline validated end-to-end (39/39 jobs, ~4 min); `stromtest.aggregate` NetCDF→Parquet built + tested (8 tests). DE-4-zone integration still pending.
+- [x] Step 7 (partial) — `stromtest.apply.apply_translation` + `stromtest apply` CLI wires translate-output bundles into a PyPSA-Eur tree (config merge, busmap copy, provenance drop). 10 tests cover happy-path, rejection of bad inputs, and idempotence. Per-zone capacity injection mechanism (custom_powerplants.csv / extendable_carriers / regional constraints) still pending — that is the actual "make the LP solve our scenario's fleet" piece.
+- [ ] Step 8 — CI mini end-to-end run
+- [x] Step 9 (partial) — Scenarios viewer in Next.js: `/scenarios` list, `/scenarios/[family]` detail with per-zone tables + cited sources, `/scenarios/compare` side-by-side. Reads committed YAMLs at build time via Server Components. Local dev only for now; Vercel deploy needs a monorepo config later.
 - [ ] Step 7 — Hydrogen efficiency override + benchmark test
 - [ ] Step 8 — CI mini end-to-end
 - [ ] Step 9 — Minimal frontend wired to real data

@@ -65,14 +65,45 @@ Outputs at `/tmp/out/`:
 - `daily.parquet` / `weekly.parquet` — same shape, period sums / SoC means
 - `metadata.json` — scenario + runtime metadata
 
-## What's pending (build steps 7+)
+## Applying a stromtest scenario to PyPSA-Eur
 
-The BE tutorial works. The DE-4-zone-Reiche-scenario pipeline does NOT yet:
+Once you have a translated scenario bundle (output of `stromtest translate`),
+the `stromtest apply` CLI wires it into a PyPSA-Eur tree:
 
-1. **Apply our translate.py artifacts to PyPSA-Eur paths.** A wrapper script
-   should copy `busmap.csv` to `pypsa_eur/data/busmaps/base_s_4_entsoegridkit.csv`,
-   merge `config_overlay.yaml` over `config/config.yaml`, and inject
-   `capacities.json` into a custom_powerplants.csv equivalent.
+```bash
+cd modeling
+uv run stromtest translate scenarios/reiche/2026-05-17.0.yml /tmp/reiche-bundle --weather-year 2010
+uv run stromtest apply /tmp/reiche-bundle pypsa_eur/
+```
+
+This writes:
+- `pypsa_eur/config/config.yaml` — our overlay merged over the default
+- `pypsa_eur/data/busmaps/base_s_4_entsoegridkit.csv` — our busmap, ready for
+  PyPSA-Eur's `custom_busmap` clustering mode
+- `pypsa_eur/.stromtest/capacities.json` + `manifest.json` — provenance
+
+After applying, run snakemake against the merged config (no `--configfile`
+flag needed — PyPSA-Eur picks up `config/config.yaml` automatically):
+
+```bash
+cd pypsa_eur
+pixi run snakemake -j2 base_network        # ~1 min, validates busmap loading
+pixi run snakemake -j2 cluster_network     # ~2 min, applies our 4-zone busmap
+pixi run snakemake -j2 solve_elec_networks # full pipeline through LP solve
+```
+
+## What's pending (build step 7+ remaining)
+
+The translation -> apply -> pipeline glue is in place. What's NOT yet wired:
+
+1. **Per-zone capacity injection.** `apply_translation` drops capacities.json
+   in `pypsa_eur/.stromtest/` for provenance but does NOT inject those
+   numbers into PyPSA-Eur's network. PyPSA-Eur defaults to `extendable_carriers`
+   optimization (build capacity to meet demand) — for our 2035 case study
+   we need fixed capacities. Options for V0:
+   - Pre-installed capacity via `custom_powerplants.csv` rows for conventional
+   - `electricity.estimate_renewable_capacities` for renewables with target year
+   - Regional capacity constraints in `solving.constraints`
 2. **Decide how to inject per-zone capacity targets.** PyPSA-Eur expects
    either `custom_powerplants.csv` rows (one per plant, with lat/lon to a
    bus), or extendable_carriers with regional constraints. Both options are
