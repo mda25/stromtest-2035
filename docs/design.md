@@ -12,7 +12,7 @@ Working title: *Energiewende Stress Tester* (final name `stromtest-2035`)
 - [x] Step 3 — 4-zone ÜNB busmap (474 rows, committed at `modeling/busmap/unb_busmap.csv`)
 - [x] Step 4 — Scenarios (Reiche-2026-05 + Habeck-2024-09, web-researched + cited)
 - [x] Step 5 — Translation layer (`stromtest.translation.translate` + `stromtest translate` CLI)
-- [ ] Step 6 — Single-run pipeline (Snakemake driving PyPSA-Eur)
+- [x] Step 6 (partial) — PyPSA-Eur env installed (pixi); BE-tutorial pipeline validated end-to-end (39/39 jobs, ~4 min); `stromtest.aggregate` NetCDF→Parquet built + tested (8 tests). DE-4-zone integration still pending.
 - [ ] Step 7 — Hydrogen efficiency override + benchmark test
 - [ ] Step 8 — CI mini end-to-end
 - [ ] Step 9 — Minimal frontend wired to real data
