@@ -252,6 +252,15 @@ Vercel auto-deploys on push to `main`; modeling pipeline runs locally (not in CI
 - **Risk: PyPSA-Eur learning curve eats more time than expected.**
   Mitigation: V0 starts with vanilla PyPSA-Eur configuration; BSc-grade hydrogen customizations can ship in V0 only if they fit cleanly via PyPSA-Eur's override hooks, else deferred to V1. Better to ship a less-bespoke V0 than to die in customization.
 
+- **Risk: Hydrogen part-load efficiency is NOT a config knob in PyPSA-Eur.**
+  Discovered during build step 2 (see [methodology.md § 7](methodology.md#7-hydrogen-system--the-honest-version)). PyPSA-Eur models the electrolyzer as a `Link` with a single constant efficiency fetched from the costs CSV; `p_min_pu` only clips the operating range, not the efficiency curve. The BSc-grade override is a real modeling extension to `prepare_sector_network.py`, not a configuration tweak. V0 plan: piecewise-linear efficiency via N parallel Links per electrolyzer instance. Falls back to constant efficiency if the piecewise extension proves too time-consuming, with a clear note on the methodology page about what was simplified.
+
+- **Risk: Inter-zone NTC values do not match BNetzA-published numbers.**
+  PyPSA-Eur computes inter-cluster transmission capacity by summing the underlying physical lines that cross cluster boundaries. The result will diverge from the politically-quoted BNetzA NTC values. V0 decision: accept PyPSA-Eur's line sums and disclose the discrepancy on the methodology page. BNetzA-cited NTC override remains a V1 option.
+
+- **Risk: External-data dependencies (ERA5 weather, costs CSV) break reproducibility.**
+  PyPSA-Eur downloads ERA5 cutouts from Copernicus (requires CDS API token) and costs CSV from data.pypsa.org at pipeline run time. CI cannot rely on these. Mitigation: commit a small frozen cutout fixture + `costs_2035.csv` under `modeling/tests/fixtures/` for the mini E2E run. Production runs use the live downloads.
+
 - **Risk: Result data outgrows git.**
   Mitigation: Results live in R2 bucket from V0 (Git LFS not used). Repo only contains the manifest pointing to bucket URLs. Per-scenario typical size: ~50-200 MB hourly Parquet; trivial for R2 at this scale.
 
