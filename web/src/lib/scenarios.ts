@@ -1,15 +1,17 @@
 /**
  * Build-time scenario loader.
  *
- * Reads the committed scenario YAMLs from ../modeling/scenarios/ via
- * Node fs (server-only). Next.js Server Components call this from page
- * files; the parsed scenarios are serialized into the rendered HTML.
- * Nothing here ships to the client bundle.
+ * Reads from a baked-at-build-time JSON file at src/data/scenarios.json,
+ * synced from ../modeling/scenarios/ by web/scripts/sync-scenarios.mjs.
+ * The sync runs as a `prebuild` step (so Vercel deploys always get fresh
+ * data) and the resulting JSON is committed (so `npm run dev` works
+ * without running the sync first, and Vercel builds succeed even when
+ * modeling/ is not visible to the web/ build context).
+ *
+ * This module is import-safe in both Server and Client Components.
  */
 
-import fs from "node:fs";
-import path from "node:path";
-import yaml from "js-yaml";
+import scenariosData from "@/data/scenarios.json";
 
 export type UNBZone = "50hertz" | "tennet" | "amprion" | "transnetbw";
 
@@ -74,58 +76,18 @@ export interface ScenarioFile {
   changelog_md: string | null;
 }
 
-const SCENARIOS_DIR = path.resolve(
-  process.cwd(),
-  "..",
-  "modeling",
-  "scenarios",
-);
-
 /**
- * Lists every (family, version) YAML committed in modeling/scenarios/.
- * Skips _template.yml, index.yml, and CHANGELOG.md files.
+ * Returns every (family, version) scenario baked into src/data/scenarios.json.
+ *
+ * Already sorted (family alphabetical, version desc) by the sync script;
+ * we just hand it back typed.
  */
 export function loadAllScenarios(): ScenarioFile[] {
-  const result: ScenarioFile[] = [];
-  const families = fs
-    .readdirSync(SCENARIOS_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory());
-  for (const fam of families) {
-    const famDir = path.join(SCENARIOS_DIR, fam.name);
-    const versionFiles = fs
-      .readdirSync(famDir)
-      .filter((f) => f.endsWith(".yml") && !f.startsWith("_"));
-    let changelog: string | null = null;
-    const changelogPath = path.join(famDir, "CHANGELOG.md");
-    if (fs.existsSync(changelogPath)) {
-      changelog = fs.readFileSync(changelogPath, "utf-8");
-    }
-    for (const vf of versionFiles) {
-      const filepath = path.join(famDir, vf);
-      const raw = fs.readFileSync(filepath, "utf-8");
-      const scenario = yaml.load(raw) as Scenario;
-      result.push({
-        family: fam.name,
-        version: scenario.version,
-        filename: vf,
-        scenario,
-        changelog_md: changelog,
-      });
-    }
-  }
-  // Stable ordering: family alphabetical, then version desc.
-  result.sort(
-    (a, b) =>
-      a.family.localeCompare(b.family) ||
-      b.version.localeCompare(a.version),
-  );
-  return result;
+  return scenariosData as ScenarioFile[];
 }
 
 export function loadScenarioByFamily(family: string): ScenarioFile | null {
-  const all = loadAllScenarios();
-  const match = all.find((s) => s.family === family);
-  return match ?? null;
+  return loadAllScenarios().find((s) => s.family === family) ?? null;
 }
 
 /**

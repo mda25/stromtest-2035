@@ -1,0 +1,312 @@
+[
+  {
+    "family": "habeck",
+    "version": "2024-09-30.0",
+    "filename": "2024-klima45.0.yml",
+    "scenario": {
+      "id": "habeck",
+      "version": "2024-09-30.0",
+      "display_name": "Habeck-Era Klimaneutralität 2045 (Stand 2024-09)",
+      "description": "Trajectory implied by the Habeck-led BMWK and the Ampel coalition before\nits November 2024 collapse. Reference pathway is Langfristszenarien 3\nT45-Strom with strong direct electrification: faster heat pump rollout,\nfaster EV adoption, higher 2035 electrolyzer capacity, smaller gas backup\nvs. the later Reiche-era Kraftwerksstrategie. Used as comparison anchor\nin stromtest-2035; not the currently-operative plan in 2026.\n",
+      "authors": [
+        "matthis-damm"
+      ],
+      "sources": [
+        {
+          "ref": "KSG-2021",
+          "title": "Bundes-Klimaschutzgesetz, § 3 Klimaneutralität bis 2045",
+          "url": "https://www.gesetze-im-internet.de/ksg/__3.html",
+          "date": "2021-08-31"
+        },
+        {
+          "ref": "EEG-2023",
+          "title": "Erneuerbare-Energien-Gesetz 2023, § 4 Ausbaupfade",
+          "url": "https://www.gesetze-im-internet.de/eeg_2014/__4.html",
+          "date": "2023-01-01"
+        },
+        {
+          "ref": "WindSeeG-2023",
+          "title": "Windenergie-auf-See-Gesetz, § 1 Ausbauziele 30/40/70 GW (2030/2035/2045)",
+          "url": "https://www.gesetze-im-internet.de/windseeg/__1.html",
+          "date": "2023-01-01"
+        },
+        {
+          "ref": "LFS3-T45-Strom",
+          "title": "BMWK Langfristszenarien 3, T45-Strom — Treibhausgasneutrales Strom-Pfad (Fraunhofer ISI + Consentec + ifeu + TU Berlin)",
+          "url": "https://langfristszenarien.de/enertile-explorer-wAssets/docs/LFS3_T45_StromStern_Energieangebot.pdf",
+          "date": "2023-04-01"
+        },
+        {
+          "ref": "BMWK-LFS3-Overview",
+          "title": "BMWK — Neue Langfristszenarien für die Energiewende (Vorstellung LFS3)",
+          "url": "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Schlaglichter-der-Wirtschaftspolitik/2024/04/05-neue-langfristszenarien-fuer-die-energiewende.html",
+          "date": "2024-04-05"
+        },
+        {
+          "ref": "NWS-Fortschreibung-2023",
+          "title": "Fortschreibung der Nationalen Wasserstoffstrategie, BMWK (10 GW Elektrolyseur bis 2030)",
+          "url": "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Publikationen/Energie/fortschreibung-nationale-wasserstoffstrategie.html",
+          "date": "2023-07-26"
+        },
+        {
+          "ref": "NEP-2037-V2023",
+          "title": "Netzentwicklungsplan Strom 2037 mit Ausblick 2045, Version 2023, 2. Entwurf",
+          "url": "https://www.netzentwicklungsplan.de/sites/default/files/2023-12/NEP%20kompakt_2037_2045_V2023_2E.pdf",
+          "date": "2023-12-01"
+        },
+        {
+          "ref": "Agora-KNStrom2035",
+          "title": "Agora Energiewende — Klimaneutrales Stromsystem 2035 (Studie 264)",
+          "url": "https://www.agora-energiewende.de/fileadmin/Projekte/2021/2021_11_DE_KNStrom2035/A-EW_264_KNStrom2035_WEB.pdf",
+          "date": "2021-11-15"
+        },
+        {
+          "ref": "Fraunhofer-Windmonitor-2024",
+          "title": "Fraunhofer IEE Windmonitor — Ausbaustand der Bundesländer (Stand 2024)",
+          "url": "https://windmonitor.iee.fraunhofer.de/windmonitor_de/1_wind-im-strommix/1_energiewende-in-deutschland/6_Ausbaustand_der_Bundeslaender/",
+          "date": "2024-12-31"
+        },
+        {
+          "ref": "Frontier-BESS-2024",
+          "title": "Frontier Economics — Wert von Großbatteriespeichern im deutschen Stromsystem",
+          "url": "https://www.frontier-economics.com/media/jmxlrpul/frontier-economics_wert-von-bess-im-deutschen-stromsystem_-final-report.pdf",
+          "date": "2024-10-01"
+        }
+      ],
+      "capacities_2035_gw": {
+        "wind_onshore": {
+          "50hertz": 42,
+          "tennet": 58,
+          "amprion": 30,
+          "transnetbw": 15,
+          "citation_ref": "LFS3-T45-Strom"
+        },
+        "wind_offshore": {
+          "50hertz": 6,
+          "tennet": 34,
+          "amprion": 0,
+          "transnetbw": 0,
+          "citation_ref": "WindSeeG-2023"
+        },
+        "solar_pv": {
+          "50hertz": 68,
+          "tennet": 145,
+          "amprion": 67,
+          "transnetbw": 45,
+          "citation_ref": "LFS3-T45-Strom"
+        },
+        "gas_backup": {
+          "50hertz": 1.5,
+          "tennet": 3.5,
+          "amprion": 3,
+          "transnetbw": 2,
+          "citation_ref": "LFS3-T45-Strom"
+        },
+        "hydrogen_electrolyzer": {
+          "50hertz": 8,
+          "tennet": 11,
+          "amprion": 6,
+          "transnetbw": 3,
+          "citation_ref": "NWS-Fortschreibung-2023"
+        },
+        "hydrogen_storage_twh": {
+          "value": 60,
+          "citation_ref": "LFS3-T45-Strom"
+        },
+        "battery_storage_gwh": {
+          "value": 80,
+          "citation_ref": "Agora-KNStrom2035"
+        },
+        "pumped_hydro": {
+          "50hertz": 2.1,
+          "tennet": 1,
+          "amprion": 0.3,
+          "transnetbw": 1.9,
+          "citation_ref": "NEP-2037-V2023"
+        }
+      },
+      "demand_2035": {
+        "baseline_twh": 780,
+        "heat_pump_share": 0.55,
+        "ev_share_passenger": 0.7,
+        "electrolyzer_demand_twh": 126,
+        "citation_refs": [
+          "LFS3-T45-Strom",
+          "NWS-Fortschreibung-2023",
+          "BMWK-LFS3-Overview"
+        ]
+      },
+      "transmission_ntc_gw": {
+        "50hertz_to_tennet": 10,
+        "tennet_to_50hertz": 10,
+        "tennet_to_amprion": 8,
+        "amprion_to_tennet": 8,
+        "amprion_to_50hertz": 5,
+        "50hertz_to_amprion": 5,
+        "amprion_to_transnetbw": 6,
+        "transnetbw_to_amprion": 6,
+        "tennet_to_transnetbw": 4,
+        "transnetbw_to_tennet": 4
+      }
+    },
+    "changelog_md": "# Habeck scenario family — substantive change log\n\nAuthoritative record of substantive movements in the Habeck-era Klimaneutralität\n2045 scenarios. Patch bumps (citation fixes, typos) live in git history, not\nhere. ISO-date version bumps get an entry below with the underlying source.\n\n<!-- Format: ## YYYY-MM-DD.PATCH — short title -->\n<!--   Source: <citation_ref + URL> -->\n<!--   Change: <substantive fields that moved + why> -->\n\n## 2024-09-30.0 — Initial Habeck-era reference scenario\n\nSource basis: BMWK Langfristszenarien 3 T45-Strom (2023), Klimaschutzgesetz\n2021, EEG-2023, WindSeeG-2023, NWS Fortschreibung 2023, NEP 2037 V2023,\nAgora Klimaneutrales Stromsystem 2035 (2021).\n\nVersioned 2024-09-30 to anchor the snapshot of policy commitments just\nbefore the Ampel coalition collapsed (November 2024). This is the\ntrajectory that would have continued absent the change of government;\nprovided in stromtest-2035 as a comparison anchor for the Reiche scenario.\n\nKey positions encoded:\n\n- **Gas backup** ~10 GW national — pre-KWSG-3.0 Habeck-era stance from the\n  2023 Eckpunkte Kraftwerksstrategie; smaller than the Reiche 20 GW\n  expansion. Citation: LFS3-T45-Strom.\n- **Hydrogen electrolyzer** ~28 GW by 2035 — fast ramp consistent with\n  NWS Fortschreibung 10 GW by 2030 and NEP 2037 V2023 trajectory to\n  ~80 GW by 2045. Allocated to wind-rich zones plus NRW co-location.\n  Citation: NWS-Fortschreibung-2023.\n- **Hydrogen storage** 60 TWh — middle of LFS T45 70-100 TWh long-term\n  range, scaled back to reflect partial cavern build-out by 2035.\n- **Wind onshore** ~145 GW national — sits above EEG 2030 floor (115) and\n  below 2040 (160), with LFS3 T45 accelerated WindBG implementation.\n- **Wind offshore** 40 GW national — statutory floor under WindSeeG § 1.\n- **Solar PV** ~325 GW national — LFS3 T45 implies 215 + 30/year × 5 =\n  365 GW by 2035; tightened to ~325 reflecting conservative read of LFS3\n  build-rate assumptions.\n- **Battery storage** 80 GWh — scaled up from NEP 2037 V2023 B baseline\n  to reflect T45's higher flex need given smaller gas backup.\n- **Demand baseline** 780 TWh — sits between NEP B (~700) and\n  high-electrification variants (~800-1000) reflecting full\n  electrification under T45.\n- **Heat pump share** 0.55 — LFS3 T45 trajectory of 10-11 M heat pumps\n  by 2035.\n- **EV share** 0.70 — Ampel target of 15 M BEVs by 2030 implies ~70%\n  share by 2035.\n\nPer-zone allocations:\n- Same spatial methodology as Reiche scenario (current Bundesland-level\n  shares scaled to national 2035 totals, with WindBG-driven southern\n  catch-up for wind onshore).\n- Pumped hydro identical to Reiche (geography-limited, near-zero\n  difference between scenarios).\n\nOpen items for review:\n- Solar 2035 national figure of 325 GW could reasonably be 300-365 GW.\n  The chosen value is at the conservative end of the LFS3 trajectory.\n- Gas backup 10 GW could reasonably be 8-12 GW — the Habeck-era Eckpunkte\n  oscillated through 2023-2024 before the Ampel collapse.\n\nPatch updates (non-substantive — citation fix, typo) will appear in git\nhistory without a new entry here.\n"
+  },
+  {
+    "family": "reiche",
+    "version": "2026-05-17.0",
+    "filename": "2026-05-17.0.yml",
+    "scenario": {
+      "id": "reiche",
+      "version": "2026-05-17.0",
+      "display_name": "Reiche-Bundesregierung Plan (Stand 2026-05)",
+      "description": "Translation of the German Bundesregierung's energy plan into runnable\n2035 capacity, demand, and storage data under the Reiche-led BMWE. Baseline\nis NEP 2037 V2025 Scenario B; amended on gas backup (Kraftwerksstrategie,\nKoalitionsvertrag CDU/CSU-SPD 2025), hydrogen pace (slowed vs. Habeck-era\nNWS Fortschreibung), and demand profile (slower heat pump rollout). Initial\ndraft for stromtest-2035; numbers reviewed but not yet externally validated.\n",
+      "authors": [
+        "matthis-damm"
+      ],
+      "sources": [
+        {
+          "ref": "EEG-2023",
+          "title": "Erneuerbare-Energien-Gesetz 2023, § 4 Ausbaupfade",
+          "url": "https://www.gesetze-im-internet.de/eeg_2014/__4.html",
+          "date": "2023-01-01"
+        },
+        {
+          "ref": "WindSeeG-2023",
+          "title": "Windenergie-auf-See-Gesetz, § 1 Ausbauziele 30/40/70 GW (2030/2035/2045)",
+          "url": "https://www.gesetze-im-internet.de/windseeg/__1.html",
+          "date": "2023-01-01"
+        },
+        {
+          "ref": "KoaV-2025",
+          "title": "Koalitionsvertrag CDU/CSU-SPD 2025 — Verantwortung für Deutschland (Energiekapitel)",
+          "url": "https://www.cdu.de/app/uploads/2025/04/KoaV-2025-Gesamt-final-0424.pdf",
+          "date": "2025-04-09"
+        },
+        {
+          "ref": "BMWE-Kraftwerksstrategie-2026-01",
+          "title": "Grundsatzeinigung mit der Europäischen Kommission über Eckpunkte der Kraftwerksstrategie (Pressemitteilung BMWE)",
+          "url": "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Pressemitteilungen/2026/01/20260115-grundsatzeinigung-mit-europaeischen-kommission-ueber-eckpunkte-der-kraftwerksstrategie.html",
+          "date": "2026-01-15"
+        },
+        {
+          "ref": "NEP-2037-V2025",
+          "title": "Netzentwicklungsplan Strom 2037 mit Ausblick 2045, Version 2025, 1. Entwurf",
+          "url": "https://www.netzentwicklungsplan.de/sites/default/files/2025-12/NEP_2037_2045_V2025_1_Entwurf_0.pdf",
+          "date": "2025-12-10"
+        },
+        {
+          "ref": "NWS-Fortschreibung-2023",
+          "title": "Fortschreibung der Nationalen Wasserstoffstrategie, BMWK (10 GW Elektrolyseur bis 2030)",
+          "url": "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Publikationen/Energie/fortschreibung-nationale-wasserstoffstrategie.html",
+          "date": "2023-07-26"
+        },
+        {
+          "ref": "Fraunhofer-Windmonitor-2025",
+          "title": "Fraunhofer IEE Windmonitor — Ausbaustand der Bundesländer (Stand 2025)",
+          "url": "https://windmonitor.iee.fraunhofer.de/windmonitor_de/1_wind-im-strommix/1_energiewende-in-deutschland/6_Ausbaustand_der_Bundeslaender/",
+          "date": "2025-06-30"
+        },
+        {
+          "ref": "FA-Wind-Solar-2025",
+          "title": "Fachagentur Wind und Solar — Status des Windenergieausbaus an Land, 1. Halbjahr 2025",
+          "url": "https://www.fachagentur-wind-solar.de/fileadmin/Veroeffentlichungen/Wind/Daten/FA_Wind_Solar_Status_des_Windenergieausbaus_an_Land_Halbjahr_2025.pdf",
+          "date": "2025-07-15"
+        },
+        {
+          "ref": "Frontier-BESS-2024",
+          "title": "Frontier Economics — Wert von Großbatteriespeichern im deutschen Stromsystem",
+          "url": "https://www.frontier-economics.com/media/jmxlrpul/frontier-economics_wert-von-bess-im-deutschen-stromsystem_-final-report.pdf",
+          "date": "2024-10-01"
+        },
+        {
+          "ref": "BMWE-Strommarkt-Reiche-2025",
+          "title": "BMWE — Unser Strommarkt für die Energiewende (Dossier mit Reiche-Era-Positionen)",
+          "url": "https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Dossier/strommarkt-der-zukunft.html",
+          "date": "2025-11-01"
+        },
+        {
+          "ref": "BEE-Strombedarf-2025",
+          "title": "BEE — Update der Strombedarfsanalyse (~700 TWh Bruttostromverbrauch 2030, Pfad zu ~750 TWh 2035)",
+          "url": "https://www.bee-ev.de/service/publikationen-medien/beitrag/update-der-strombedarfsanalyse",
+          "date": "2025-01-20"
+        }
+      ],
+      "capacities_2035_gw": {
+        "wind_onshore": {
+          "50hertz": 40,
+          "tennet": 56,
+          "amprion": 28,
+          "transnetbw": 14,
+          "citation_ref": "EEG-2023"
+        },
+        "wind_offshore": {
+          "50hertz": 6,
+          "tennet": 34,
+          "amprion": 0,
+          "transnetbw": 0,
+          "citation_ref": "WindSeeG-2023"
+        },
+        "solar_pv": {
+          "50hertz": 60,
+          "tennet": 130,
+          "amprion": 60,
+          "transnetbw": 42,
+          "citation_ref": "EEG-2023"
+        },
+        "gas_backup": {
+          "50hertz": 3,
+          "tennet": 7,
+          "amprion": 6,
+          "transnetbw": 4,
+          "citation_ref": "BMWE-Kraftwerksstrategie-2026-01"
+        },
+        "hydrogen_electrolyzer": {
+          "50hertz": 4,
+          "tennet": 6,
+          "amprion": 3,
+          "transnetbw": 2,
+          "citation_ref": "NWS-Fortschreibung-2023"
+        },
+        "hydrogen_storage_twh": {
+          "value": 40,
+          "citation_ref": "NWS-Fortschreibung-2023"
+        },
+        "battery_storage_gwh": {
+          "value": 52,
+          "citation_ref": "NEP-2037-V2025"
+        },
+        "pumped_hydro": {
+          "50hertz": 2.1,
+          "tennet": 1,
+          "amprion": 0.3,
+          "transnetbw": 1.9,
+          "citation_ref": "NEP-2037-V2025"
+        }
+      },
+      "demand_2035": {
+        "baseline_twh": 700,
+        "heat_pump_share": 0.35,
+        "ev_share_passenger": 0.5,
+        "electrolyzer_demand_twh": 67,
+        "citation_refs": [
+          "NEP-2037-V2025",
+          "BEE-Strombedarf-2025",
+          "NWS-Fortschreibung-2023"
+        ]
+      },
+      "transmission_ntc_gw": {
+        "50hertz_to_tennet": 10,
+        "tennet_to_50hertz": 10,
+        "tennet_to_amprion": 8,
+        "amprion_to_tennet": 8,
+        "amprion_to_50hertz": 5,
+        "50hertz_to_amprion": 5,
+        "amprion_to_transnetbw": 6,
+        "transnetbw_to_amprion": 6,
+        "tennet_to_transnetbw": 4,
+        "transnetbw_to_tennet": 4
+      }
+    },
+    "changelog_md": "# Reiche scenario family — substantive change log\n\nAuthoritative record of substantive movements in the Reiche-Bundesregierung\nscenarios. Patch bumps (citation fixes, typos) live in git history, not\nhere. ISO-date version bumps (capacity, demand, NTC changes) get an entry\nbelow with the underlying source.\n\n<!-- Format: ## YYYY-MM-DD.PATCH — short title -->\n<!--   Source: <citation_ref + URL> -->\n<!--   Change: <substantive fields that moved + why> -->\n\n## 2026-05-17.0 — Initial Reiche scenario\n\nSource basis: Koalitionsvertrag CDU/CSU-SPD 2025 (signed 2025-04-09;\nenergy chapter), BMWE Kraftwerksstrategie Grundsatzeinigung mit der\nEU-Kommission (2026-01-15), NEP 2037/2045 V2025 1. Entwurf (2025-12-10),\nNWS Fortschreibung 2023, EEG-2023, WindSeeG-2023.\n\nKey positions encoded vs. legal floors and prior Habeck-era pathway:\n\n- **Gas backup** scaled UP to 20 GW per Kraftwerksstrategie (vs. ~10 GW\n  in Habeck-era Eckpunkte 2023). Allocated south-heavy reflecting demand-\n  vs-supply gap and KWSG netzdienliche Standorte criterion. Citation:\n  BMWE-Kraftwerksstrategie-2026-01.\n- **Hydrogen electrolyzer** scaled DOWN to ~15 GW by 2035 (vs. ~28 GW\n  in T45-Strom pathway) reflecting Koalitionsvertrag positioning of\n  \"Wasserstoffhochlauf beschleunigen, alle Farben\". Slower domestic\n  electrolyzer build means more import reliance. Citation: NWS-\n  Fortschreibung-2023 + KoaV-2025.\n- **Hydrogen storage** at 40 TWh — low end of LFS T45 70-100 TWh long-term\n  range, consistent with slower hydrogen pathway.\n- **Wind onshore** ~138 GW national — interpolated between EEG 115 GW\n  (2030) and 160 GW (2040), unchanged by Reiche-era (statutory).\n- **Wind offshore** 40 GW national — statutory floor under WindSeeG § 1,\n  unchanged.\n- **Solar PV** ~292 GW national — interpolated EEG 215 (2030) → 400 (2040),\n  tightened to ~290 reflecting Reiche-era tempering of mid-decade incentives.\n- **Battery storage** 52 GWh national — interpolated from NEP 2037 V2025\n  Scenario B (24 GW / 61 GWh by 2037).\n- **Demand baseline** 700 TWh — middle of NEP V2025 A/B range, reflecting\n  slowed heat pump and EV uptake under Reiche.\n- **Heat pump share** 0.35, **EV share** 0.50 — slower than Habeck-era\n  T45 (0.55 / 0.70).\n\nPer-zone allocations:\n- Onshore wind allocated proportionally to current Fraunhofer Windmonitor\n  2025 per-Bundesland production, scaled to national 2035 target with\n  modest catch-up adjustment for southern Bundesländer under the WindBG 2%\n  land-area mandate.\n- Offshore wind allocated to coastal landing zones only (Nds + SH = TenneT\n  for North Sea; MV = 50Hertz for Baltic).\n- Solar allocated by current per-zone share with small rebalancing toward\n  Bayern + BW (rooftop dominance, population).\n- Gas backup allocated by demand-vs-supply gap heuristic (no published\n  per-zone breakdown exists in KWSG documents).\n- Electrolyzer allocated to wind-rich zones + NRW industrial demand.\n\nOpen items for review:\n- Per-zone gas backup allocation is [LOW] confidence — KWSG criteria are\n  qualitative (\"netzdienlich\"), not quantitative per zone.\n- Per-zone electrolyzer allocation likewise [LOW] — no public 2035 NWS\n  regional plan exists.\n- Solar 2035 national figure of 292 GW interpolated from EEG; could\n  reasonably be 270-310 GW depending on read of Reiche pace assumptions.\n- Demand 700 TWh sits at the low end of NEP V2025 B (which spans\n  ~700-1000 TWh depending on electrification assumptions).\n\nPatch updates (non-substantive — citation fix, typo) will appear in git\nhistory without a new entry here.\n"
+  }
+]

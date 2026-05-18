@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-scenarios.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-scenarios.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-scenarios": "node scripts/sync-scenarios.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
