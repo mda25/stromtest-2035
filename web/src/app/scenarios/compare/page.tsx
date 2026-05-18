@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import {
   type ScenarioFile,
   formatGW,
@@ -12,7 +11,7 @@ import {
 } from "@/lib/scenarios";
 
 export const metadata = {
-  title: "Compare · stromtest-2035",
+  title: "Compare",
   description:
     "Side-by-side numerical comparison of the committed scenario families.",
 };
@@ -21,9 +20,9 @@ export default function ComparePage() {
   const files = loadAllScenarios();
   if (files.length < 2) {
     return (
-      <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12">
-        <BackLink />
-        <h1 className="text-3xl font-semibold tracking-tight">Compare</h1>
+      <main className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+        <Breadcrumb />
+        <h1 className="display-1">Compare</h1>
         <p className="text-muted-foreground">
           Need at least two committed scenarios to compare. Currently:{" "}
           {files.length}.
@@ -32,7 +31,6 @@ export default function ComparePage() {
     );
   }
 
-  // Take the most-recent version per family.
   const byFamily = new Map<string, ScenarioFile>();
   for (const f of files) {
     if (!byFamily.has(f.family)) byFamily.set(f.family, f);
@@ -41,44 +39,56 @@ export default function ComparePage() {
   const others = Array.from(byFamily.values()).filter((f) => f !== primary);
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-12">
-      <BackLink />
-      <header className="space-y-3">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Scenario comparison
+    <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <Breadcrumb />
+
+      <header className="mt-6 mb-12 max-w-3xl space-y-4 border-b border-border/60 pb-10 md:mb-16 md:pb-14">
+        <p className="eyebrow">Compare</p>
+        <h1 className="display-1 text-balance">
+          Two plans, head-to-head.
         </h1>
-        <p className="text-pretty text-lg text-muted-foreground">
-          National totals per technology, demand, and storage values across the
-          committed scenario families. Drill in via the family link for full
-          per-zone numbers and citations.
+        <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+          National totals per technology, demand, and storage across the
+          committed scenario families. Drill into a family for full per-zone
+          numbers and cited sources.
         </p>
       </header>
 
-      <Separator />
-
       <ComparisonTable primary={primary} others={others} />
 
-      <Separator />
-
       <ZoneBreakdowns files={[primary, ...others]} />
+
+      <div className="mt-16 flex flex-wrap gap-3 border-t border-border/60 pt-10">
+        <Link
+          href="/scenarios"
+          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+        >
+          ← All scenarios
+        </Link>
+        <Link
+          href="/methodology"
+          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+        >
+          Methodology
+        </Link>
+      </div>
     </main>
   );
 }
 
-function BackLink() {
+function Breadcrumb() {
   return (
-    <div className="flex items-center gap-3 text-sm">
-      <Link href="/" className="text-muted-foreground underline-offset-4 hover:underline">
-        ← stromtest-2035
+    <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+      <Link href="/" className="hover:text-foreground">
+        Home
       </Link>
-      <span className="text-muted-foreground">·</span>
-      <Link
-        href="/scenarios"
-        className="text-muted-foreground underline-offset-4 hover:underline"
-      >
-        scenarios
+      <span>/</span>
+      <Link href="/scenarios" className="hover:text-foreground">
+        Scenarios
       </Link>
-    </div>
+      <span>/</span>
+      <span className="text-foreground">Compare</span>
+    </nav>
   );
 }
 
@@ -90,10 +100,9 @@ function ComparisonTable({
   others: ScenarioFile[];
 }) {
   const cols = [primary, ...others];
-  const rows: { label: string; values: string[] }[] = cols.map((f) => {
+  const rows: { values: string[] }[] = cols.map((f) => {
     const c = f.scenario.capacities_2035_gw;
     return {
-      label: f.family,
       values: [
         formatGW(zoneSum(c.wind_onshore)),
         formatGW(zoneSum(c.wind_offshore)),
@@ -125,43 +134,57 @@ function ComparisonTable({
     "Electrolyzer demand",
   ];
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b text-left">
-            <th className="py-2 pr-4 font-medium">Metric</th>
-            {cols.map((f) => (
-              <th
-                key={`${f.family}-${f.version}`}
-                className="py-2 pr-4 font-medium"
-              >
-                <div className="flex flex-col gap-1">
-                  <span>{f.scenario.display_name}</span>
-                  <Badge variant="outline" className="w-fit text-xs">
-                    {f.version}
-                  </Badge>
-                </div>
+    <section className="mb-16">
+      <div className="mb-6 space-y-2">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+          01 · Headline numbers
+        </p>
+        <h2 className="display-3 text-balance">
+          National totals, side-by-side
+        </h2>
+      </div>
+      <div className="overflow-x-auto rounded-2xl border border-border/60">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/40 text-left">
+            <tr>
+              <th className="px-4 py-4 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
+                Metric
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {metrics.map((m, i) => (
-            <tr key={m} className="border-b last:border-0">
-              <td className="py-2 pr-4 text-muted-foreground">{m}</td>
-              {rows.map((r) => (
-                <td
-                  key={`${r.label}-${m}`}
-                  className="py-2 pr-4 font-mono tabular-nums"
+              {cols.map((f) => (
+                <th
+                  key={`${f.family}-${f.version}`}
+                  className="px-4 py-4 align-top text-xs font-medium uppercase tracking-[0.1em]"
                 >
-                  {r.values[i]}
-                </td>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-semibold text-foreground">
+                      {f.scenario.display_name}
+                    </span>
+                    <Badge variant="outline" className="w-fit text-[10px]">
+                      {f.version}
+                    </Badge>
+                  </div>
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="divide-y divide-border/60">
+            {metrics.map((m, i) => (
+              <tr key={m} className="transition-colors hover:bg-muted/30">
+                <td className="px-4 py-3 text-muted-foreground">{m}</td>
+                {rows.map((r, j) => (
+                  <td
+                    key={`${m}-${j}`}
+                    className="px-4 py-3 font-mono tabular-nums"
+                  >
+                    {r.values[i]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }
 
@@ -175,73 +198,85 @@ type ZoneTechKey =
 
 function ZoneBreakdowns({ files }: { files: ScenarioFile[] }) {
   const techs: { label: string; key: ZoneTechKey }[] = [
-    { label: "Wind onshore (GW)", key: "wind_onshore" },
-    { label: "Wind offshore (GW)", key: "wind_offshore" },
-    { label: "Solar PV (GW)", key: "solar_pv" },
-    { label: "Gas backup (GW)", key: "gas_backup" },
-    { label: "H₂ electrolyzer (GW)", key: "hydrogen_electrolyzer" },
-    { label: "Pumped hydro (GW)", key: "pumped_hydro" },
+    { label: "Wind onshore", key: "wind_onshore" },
+    { label: "Wind offshore", key: "wind_offshore" },
+    { label: "Solar PV", key: "solar_pv" },
+    { label: "Gas backup", key: "gas_backup" },
+    { label: "H₂ electrolyzer", key: "hydrogen_electrolyzer" },
+    { label: "Pumped hydro", key: "pumped_hydro" },
   ];
+
   return (
-    <section className="space-y-6">
-      <h2 className="text-2xl font-semibold tracking-tight">
-        Per-ÜNB-zone allocation
-      </h2>
-      <p className="text-sm text-muted-foreground">
-        How each scenario distributes installed capacity across the four German
-        Regelzonen. TenneT covers Niedersachsen + most of Schleswig-Holstein +
-        Bayern + Hessen + Bremen; 50Hertz covers Berlin, Brandenburg, MV,
-        Sachsen, Sachsen-Anhalt, Thüringen + Hamburg; Amprion covers NRW + RLP
-        + Saarland; TransnetBW covers Baden-Württemberg.
-      </p>
-      <div className="space-y-4">
+    <section className="space-y-10">
+      <div className="space-y-2">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+          02 · Per-zone
+        </p>
+        <h2 className="display-3 text-balance">
+          How each plan distributes the fleet
+        </h2>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          TenneT covers Niedersachsen + most of Schleswig-Holstein + Bayern +
+          Hessen + Bremen. 50Hertz covers Berlin, Brandenburg, MV, Sachsen,
+          Sachsen-Anhalt, Thüringen + Hamburg. Amprion covers NRW + RLP +
+          Saarland. TransnetBW covers Baden-Württemberg.
+        </p>
+      </div>
+
+      <div className="space-y-6">
         {techs.map(({ label, key }) => (
-          <div key={key} className="overflow-x-auto">
-            <h3 className="mb-2 font-medium">{label}</h3>
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b text-left text-muted-foreground">
-                  <th className="py-1 pr-4 font-medium">Scenario</th>
-                  <th className="py-1 pr-4 font-medium">50Hertz</th>
-                  <th className="py-1 pr-4 font-medium">TenneT</th>
-                  <th className="py-1 pr-4 font-medium">Amprion</th>
-                  <th className="py-1 pr-4 font-medium">TransnetBW</th>
-                  <th className="py-1 pr-4 font-medium">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {files.map((f) => {
-                  const caps = f.scenario.capacities_2035_gw[key];
-                  return (
-                    <tr
-                      key={`${f.family}-${key}`}
-                      className="border-b last:border-0"
-                    >
-                      <td className="py-1 pr-4">{f.family}</td>
-                      <td className="py-1 pr-4 font-mono tabular-nums">
-                        {caps["50hertz"].toFixed(1)}
-                      </td>
-                      <td className="py-1 pr-4 font-mono tabular-nums">
-                        {caps.tennet.toFixed(1)}
-                      </td>
-                      <td className="py-1 pr-4 font-mono tabular-nums">
-                        {caps.amprion.toFixed(1)}
-                      </td>
-                      <td className="py-1 pr-4 font-mono tabular-nums">
-                        {caps.transnetbw.toFixed(1)}
-                      </td>
-                      <td className="py-1 pr-4 font-mono tabular-nums font-medium">
-                        {zoneSum(caps).toFixed(1)}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div
+            key={key}
+            className="overflow-hidden rounded-2xl border border-border/60"
+          >
+            <div className="bg-muted/40 px-4 py-3 text-sm font-semibold">
+              {label} <span className="text-muted-foreground">(GW)</span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="text-left text-xs uppercase tracking-[0.1em] text-muted-foreground">
+                  <tr className="border-t border-border/60">
+                    <th className="px-4 py-2 font-medium">Scenario</th>
+                    <th className="px-4 py-2 font-medium">50Hertz</th>
+                    <th className="px-4 py-2 font-medium">TenneT</th>
+                    <th className="px-4 py-2 font-medium">Amprion</th>
+                    <th className="px-4 py-2 font-medium">TransnetBW</th>
+                    <th className="px-4 py-2 font-medium">Total</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  {files.map((f) => {
+                    const caps = f.scenario.capacities_2035_gw[key];
+                    return (
+                      <tr
+                        key={`${f.family}-${key}`}
+                        className="transition-colors hover:bg-muted/30"
+                      >
+                        <td className="px-4 py-2 font-medium">{f.family}</td>
+                        <td className="px-4 py-2 font-mono tabular-nums">
+                          {caps["50hertz"].toFixed(1)}
+                        </td>
+                        <td className="px-4 py-2 font-mono tabular-nums">
+                          {caps.tennet.toFixed(1)}
+                        </td>
+                        <td className="px-4 py-2 font-mono tabular-nums">
+                          {caps.amprion.toFixed(1)}
+                        </td>
+                        <td className="px-4 py-2 font-mono tabular-nums">
+                          {caps.transnetbw.toFixed(1)}
+                        </td>
+                        <td className="px-4 py-2 font-mono font-semibold tabular-nums text-primary">
+                          {zoneSum(caps).toFixed(1)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         ))}
       </div>
     </section>
   );
 }
-

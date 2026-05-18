@@ -1,14 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { DispatchPanel } from "@/components/dispatch/dispatch-panel";
 import { loadDispatchForFamily } from "@/lib/dispatch";
 import {
@@ -41,100 +33,93 @@ export default async function ScenarioFamilyPage({ params }: Props) {
   const latest = files[0];
   const s = latest.scenario;
   const dispatch = loadDispatchForFamily(family);
-  return (
-    <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12">
-      <div className="flex items-center gap-3 text-sm">
-        <Link
-          href="/"
-          className="text-muted-foreground underline-offset-4 hover:underline"
-        >
-          ← stromtest-2035
-        </Link>
-        <span className="text-muted-foreground">·</span>
-        <Link
-          href="/scenarios"
-          className="text-muted-foreground underline-offset-4 hover:underline"
-        >
-          scenarios
-        </Link>
-      </div>
+  const c = s.capacities_2035_gw;
+  const totalRenewable =
+    zoneSum(c.wind_onshore) + zoneSum(c.wind_offshore) + zoneSum(c.solar_pv);
 
-      <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            {s.display_name}
-          </h1>
-          <Badge variant="outline">{latest.version}</Badge>
+  return (
+    <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <Breadcrumb />
+
+      <header className="mt-6 mb-12 space-y-5 border-b border-border/60 pb-10 md:mb-16 md:pb-14">
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+            {family} · {latest.version}
+          </p>
+          <Badge variant="outline">
+            {files.length} version{files.length === 1 ? "" : "s"} committed
+          </Badge>
+          {dispatch && (
+            <Badge variant="outline" className="bg-primary/10 text-primary">
+              Dispatch available
+            </Badge>
+          )}
         </div>
-        <p className="text-pretty text-lg text-muted-foreground">{s.description}</p>
+        <h1 className="display-1 text-balance">{s.display_name}</h1>
+        <p className="max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          {s.description}
+        </p>
         <p className="text-sm text-muted-foreground">
-          Authors: {s.authors.join(", ")} ·{" "}
-          {files.length} version{files.length === 1 ? "" : "s"} committed
+          Authors: {s.authors.join(", ")} · {s.sources.length} cited sources
         </p>
       </header>
 
-      <Separator />
-
-      <NationalTotalsCard file={latest} />
+      <NationalTotalsBlock file={latest} totalRenewable={totalRenewable} />
 
       <ZoneTable file={latest} />
 
-      <DemandCard file={latest} />
+      <DemandRow file={latest} />
 
       {dispatch ? (
-        <>
-          <Separator />
+        <section className="mt-16">
           <DispatchPanel bundle={dispatch} />
-        </>
+        </section>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Dispatch</CardTitle>
-            <CardDescription>
-              No solved dispatch committed for this scenario yet. Run the
-              PyPSA-Eur pipeline + capacity injection (see
-              <code className="mx-1 rounded bg-muted px-1.5 py-0.5">
-                modeling/RUNBOOK.md
-              </code>{" "}
-              smoke test 4) and run{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5">
-                bin/build_dispatch_json.py
-              </code>{" "}
-              to populate{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5">
-                web/src/data/dispatch/{family}.json
-              </code>
-              .
-            </CardDescription>
-          </CardHeader>
-        </Card>
+        <NoDispatchCard family={family} />
       )}
 
       <SourcesList file={latest} />
 
-      {latest.changelog_md && (
-        <section>
-          <h2 className="mb-3 text-xl font-semibold tracking-tight">Changelog</h2>
-          <pre className="overflow-x-auto rounded-md bg-muted p-4 text-xs whitespace-pre-wrap">
-            {latest.changelog_md}
-          </pre>
-        </section>
-      )}
+      {latest.changelog_md && <ChangelogBlock changelog={latest.changelog_md} />}
+
+      <NavLinks />
     </main>
   );
 }
 
-function NationalTotalsCard({ file }: { file: ScenarioFile }) {
+function Breadcrumb() {
+  return (
+    <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+      <Link href="/" className="hover:text-foreground">
+        Home
+      </Link>
+      <span>/</span>
+      <Link href="/scenarios" className="hover:text-foreground">
+        Scenarios
+      </Link>
+    </nav>
+  );
+}
+
+function NationalTotalsBlock({
+  file,
+  totalRenewable,
+}: {
+  file: ScenarioFile;
+  totalRenewable: number;
+}) {
   const c = file.scenario.capacities_2035_gw;
-  const stats: { label: string; value: string }[] = [
+  const stats: { label: string; value: string; accent?: boolean }[] = [
+    {
+      label: "Total renewables",
+      value: `${totalRenewable.toFixed(0)} GW`,
+      accent: true,
+    },
     { label: "Wind onshore", value: formatGW(zoneSum(c.wind_onshore)) },
     { label: "Wind offshore", value: formatGW(zoneSum(c.wind_offshore)) },
     { label: "Solar PV", value: formatGW(zoneSum(c.solar_pv)) },
     { label: "Gas backup", value: formatGW(zoneSum(c.gas_backup)) },
-    {
-      label: "H₂ electrolyzer",
-      value: formatGW(zoneSum(c.hydrogen_electrolyzer)),
-    },
+    { label: "H₂ electrolyzer", value: formatGW(zoneSum(c.hydrogen_electrolyzer)) },
     { label: "Pumped hydro", value: formatGW(zoneSum(c.pumped_hydro)) },
     { label: "Battery storage", value: formatGWh(c.battery_storage_gwh.value) },
     {
@@ -143,24 +128,26 @@ function NationalTotalsCard({ file }: { file: ScenarioFile }) {
     },
   ];
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>National totals (2035)</CardTitle>
-        <CardDescription>
-          Sum across the four ÜNB Regelzonen for installed capacity and storage.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <dt className="text-sm text-muted-foreground">{s.label}</dt>
-              <dd className="font-mono tabular-nums text-lg">{s.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </CardContent>
-    </Card>
+    <section className="mb-16">
+      <SectionTitle eyebrow="01 · Capacity" title="National totals (2035)" />
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60 md:grid-cols-3 lg:grid-cols-4">
+        {stats.map((s) => (
+          <div
+            key={s.label}
+            className={`bg-card p-5 ${s.accent ? "ring-1 ring-inset ring-primary/30" : ""}`}
+          >
+            <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+              {s.label}
+            </p>
+            <p
+              className={`mt-2 font-mono text-2xl tabular-nums tracking-tight ${s.accent ? "text-primary" : ""}`}
+            >
+              {s.value}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -175,132 +162,186 @@ function ZoneTable({ file }: { file: ScenarioFile }) {
     { label: "Pumped hydro", zc: c.pumped_hydro },
   ];
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Per-zone capacity (GW)</CardTitle>
-        <CardDescription>
-          Allocation across the four ÜNB control zones.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b text-left text-muted-foreground">
-                <th className="py-2 pr-4 font-medium">Technology</th>
-                <th className="py-2 pr-4 font-medium">50Hertz</th>
-                <th className="py-2 pr-4 font-medium">TenneT</th>
-                <th className="py-2 pr-4 font-medium">Amprion</th>
-                <th className="py-2 pr-4 font-medium">TransnetBW</th>
-                <th className="py-2 pr-4 font-medium">Total</th>
-                <th className="py-2 pr-4 font-medium">Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r.label} className="border-b last:border-0">
-                  <td className="py-2 pr-4">{r.label}</td>
-                  <td className="py-2 pr-4 font-mono tabular-nums">
-                    {r.zc["50hertz"].toFixed(1)}
-                  </td>
-                  <td className="py-2 pr-4 font-mono tabular-nums">
-                    {r.zc.tennet.toFixed(1)}
-                  </td>
-                  <td className="py-2 pr-4 font-mono tabular-nums">
-                    {r.zc.amprion.toFixed(1)}
-                  </td>
-                  <td className="py-2 pr-4 font-mono tabular-nums">
-                    {r.zc.transnetbw.toFixed(1)}
-                  </td>
-                  <td className="py-2 pr-4 font-mono tabular-nums font-medium">
-                    {zoneSum(r.zc).toFixed(1)}
-                  </td>
-                  <td className="py-2 pr-4 text-xs text-muted-foreground">
+    <section className="mb-16">
+      <SectionTitle
+        eyebrow="02 · Allocation"
+        title="Per-ÜNB-zone capacity (GW)"
+      />
+      <div className="overflow-x-auto rounded-2xl border border-border/60">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/40 text-left text-xs uppercase tracking-[0.1em] text-muted-foreground">
+            <tr>
+              <th className="px-4 py-3 font-medium">Technology</th>
+              <th className="px-4 py-3 font-medium">50Hertz</th>
+              <th className="px-4 py-3 font-medium">TenneT</th>
+              <th className="px-4 py-3 font-medium">Amprion</th>
+              <th className="px-4 py-3 font-medium">TransnetBW</th>
+              <th className="px-4 py-3 font-medium">Total</th>
+              <th className="px-4 py-3 font-medium">Source</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border/60">
+            {rows.map((r) => (
+              <tr key={r.label} className="transition-colors hover:bg-muted/30">
+                <td className="px-4 py-3 font-medium">{r.label}</td>
+                <td className="px-4 py-3 font-mono tabular-nums">
+                  {r.zc["50hertz"].toFixed(1)}
+                </td>
+                <td className="px-4 py-3 font-mono tabular-nums">
+                  {r.zc.tennet.toFixed(1)}
+                </td>
+                <td className="px-4 py-3 font-mono tabular-nums">
+                  {r.zc.amprion.toFixed(1)}
+                </td>
+                <td className="px-4 py-3 font-mono tabular-nums">
+                  {r.zc.transnetbw.toFixed(1)}
+                </td>
+                <td className="px-4 py-3 font-mono font-semibold tabular-nums text-primary">
+                  {zoneSum(r.zc).toFixed(1)}
+                </td>
+                <td className="px-4 py-3">
+                  <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
                     {r.zc.citation_ref}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </CardContent>
-    </Card>
+                  </code>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }
 
-function DemandCard({ file }: { file: ScenarioFile }) {
+function DemandRow({ file }: { file: ScenarioFile }) {
   const d = file.scenario.demand_2035;
+  const items = [
+    { label: "Baseline demand", value: formatTWh(d.baseline_twh) },
+    { label: "Heat pump share", value: formatPercent(d.heat_pump_share) },
+    { label: "EV passenger share", value: formatPercent(d.ev_share_passenger) },
+    { label: "Electrolyzer demand", value: formatTWh(d.electrolyzer_demand_twh) },
+  ];
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Demand &amp; electrification (2035)</CardTitle>
-        <CardDescription>
-          Projected demand baseline plus heat-pump / EV / electrolyzer shares.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-4 text-sm">
-        <div>
-          <p className="text-muted-foreground">Baseline</p>
-          <p className="font-mono tabular-nums text-lg">
-            {formatTWh(d.baseline_twh)}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Heat pump share</p>
-          <p className="font-mono tabular-nums text-lg">
-            {formatPercent(d.heat_pump_share)}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">EV passenger share</p>
-          <p className="font-mono tabular-nums text-lg">
-            {formatPercent(d.ev_share_passenger)}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Electrolyzer demand</p>
-          <p className="font-mono tabular-nums text-lg">
-            {formatTWh(d.electrolyzer_demand_twh)}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    <section className="mb-16">
+      <SectionTitle
+        eyebrow="03 · Demand"
+        title="Projected demand &amp; electrification"
+      />
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60 md:grid-cols-4">
+        {items.map((s) => (
+          <div key={s.label} className="bg-card p-5">
+            <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+              {s.label}
+            </p>
+            <p className="mt-2 font-mono text-2xl tabular-nums tracking-tight">
+              {s.value}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function NoDispatchCard({ family }: { family: string }) {
+  return (
+    <section className="mb-16">
+      <SectionTitle eyebrow="04 · Dispatch" title="No solved run yet" />
+      <div className="rounded-2xl border border-dashed border-border/80 bg-card/30 p-6 md:p-8">
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          No solved dispatch committed for this scenario yet. Run the
+          PyPSA-Eur pipeline plus capacity injection (see{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
+            modeling/RUNBOOK.md
+          </code>{" "}
+          smoke test 4), then{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
+            bin/build_dispatch_json.py
+          </code>{" "}
+          to populate{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
+            web/src/data/dispatch/{family}.json
+          </code>
+          . The dispatch panel will populate automatically.
+        </p>
+      </div>
+    </section>
   );
 }
 
 function SourcesList({ file }: { file: ScenarioFile }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Cited sources ({file.scenario.sources.length})</CardTitle>
-        <CardDescription>
-          Every substantive number traces back to one of these.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ul className="space-y-2 text-sm">
-          {file.scenario.sources.map((src) => (
-            <li key={src.ref} className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-                  {src.ref}
-                </code>
-                {src.date && (
-                  <span className="text-xs text-muted-foreground">{src.date}</span>
-                )}
-              </div>
-              <a
-                href={src.url}
-                className="underline-offset-4 hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {src.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <section className="mb-16">
+      <SectionTitle
+        eyebrow="05 · Provenance"
+        title={`Cited sources (${file.scenario.sources.length})`}
+      />
+      <ul className="grid gap-3 md:grid-cols-2">
+        {file.scenario.sources.map((src) => (
+          <li
+            key={src.ref}
+            className="rounded-xl border border-border/60 bg-card p-4 transition-colors hover:border-primary/40"
+          >
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px]">
+                {src.ref}
+              </code>
+              {src.date && (
+                <span className="text-muted-foreground">{src.date}</span>
+              )}
+            </div>
+            <a
+              href={src.url}
+              className="mt-2 block text-sm font-medium underline-offset-4 hover:text-primary hover:underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {src.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function ChangelogBlock({ changelog }: { changelog: string }) {
+  return (
+    <section className="mb-16">
+      <SectionTitle eyebrow="06 · History" title="Changelog" />
+      <pre className="overflow-x-auto rounded-2xl border border-border/60 bg-card p-5 text-xs leading-relaxed whitespace-pre-wrap text-foreground/80">
+        {changelog}
+      </pre>
+    </section>
+  );
+}
+
+function NavLinks() {
+  return (
+    <div className="mt-16 flex flex-wrap gap-3 border-t border-border/60 pt-10">
+      <Link
+        href="/scenarios"
+        className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+      >
+        ← All scenarios
+      </Link>
+      <Link
+        href="/scenarios/compare"
+        className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+      >
+        Compare scenarios →
+      </Link>
+    </div>
+  );
+}
+
+function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div className="mb-6 space-y-2">
+      <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+        {eyebrow}
+      </p>
+      <h2 className="display-3 text-balance">{title}</h2>
+    </div>
   );
 }
