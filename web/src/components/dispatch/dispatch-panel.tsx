@@ -13,6 +13,7 @@ import {
   toRechartsStacked,
 } from "@/lib/dispatch-utils";
 import { StackedAreaChart } from "./stacked-area-chart";
+import { ZoneMap } from "./zone-map";
 
 interface Props {
   bundle: DispatchBundle;
@@ -45,6 +46,20 @@ export function DispatchPanel({ bundle }: Props) {
           </Badge>
         </div>
       </header>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Zone map — net balance</CardTitle>
+          <CardDescription>
+            The four ÜNB Regelzonen colored by generation minus load.
+            Green = exporter, red = importer, intensity scales with
+            magnitude. Hover a zone for full numbers.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ZoneMap bundle={bundle} />
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>
