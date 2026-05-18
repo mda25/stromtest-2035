@@ -1,0 +1,96 @@
+# DE-tutorial config with our hand-curated 4-zone UNB busmap.
+#
+# Same as de-tutorial.yaml but with clustering.mode: custom_busmap so the
+# cluster_network step uses our 474-row entsoegridkit busmap aligned to
+# TenneT / 50Hertz / Amprion / TransnetBW Regelzonen rather than k-means.
+#
+# Prerequisite: 2-column (bus_id, cluster) busmap CSV must exist at
+# modeling/pypsa_eur/data/busmaps/base_s_4_entsoegridkit.csv. Either run
+# `stromtest apply` to drop it from a translation bundle, or run
+# `bin/sync_busmap.sh` to derive the 2-column form from
+# modeling/busmap/unb_busmap.csv.
+
+tutorial: true
+
+run:
+  name: "de-tutorial-cbm"
+  disable_progressbar: true
+  shared_resources:
+    policy: false
+
+scenario:
+  clusters:
+  - 4
+  opts:
+  - ''
+
+countries: ['DE']
+
+snapshots:
+  start: "2013-03-01"
+  end: "2013-03-08"
+
+electricity:
+  base_network: entsoegridkit
+
+  co2limit_enable: true
+  co2limit: 200.e+6
+
+  extendable_carriers:
+    Generator: [solar, solar-hsat, onwind, offwind-ac, offwind-dc, offwind-float, OCGT, CCGT, nuclear]
+    StorageUnit: [battery]
+    Store: [H2]
+    Link: [H2 pipeline]
+
+  renewable_carriers: [solar, solar-hsat, onwind, offwind-ac, offwind-dc, offwind-float]
+  estimate_renewable_capacities:
+    enable: true
+    from_powerplantmatching: true
+    year: 2020
+    expansion_limit: false
+    technology_mapping:
+      Offshore: offwind-ac
+      Onshore: onwind
+      PV: solar
+
+atlite:
+  default_cutout: de-03-2013-era5
+  cutouts:
+    de-03-2013-era5:
+      module: era5
+      x: [5., 16.]
+      y: [46., 56.]
+      time: ["2013-03-01", "2013-03-08"]
+
+renewable:
+  offwind-ac:
+    max_depth: false
+  offwind-dc:
+    max_depth: false
+  offwind-float:
+    max_depth: false
+    min_depth: false
+
+clustering:
+  mode: custom_busmap
+  exclude_carriers: ["OCGT", "offwind-ac", "coal"]
+  temporal:
+    resolution_elec: 24h
+
+lines:
+  dynamic_line_rating:
+    activate: true
+    max_line_rating: 1.3
+
+solving:
+  solver:
+    name: highs
+    options: highs-default
+
+# Tell PyPSA-Eur to build the cutout via CDS rather than retrieving it from
+# data.pypsa.org (which only ships europe-2013 + be-03-2013). Config key
+# is `data.cutout.source` per rules/common.smk:dataset_version.
+data:
+  cutout:
+    source: build
+    version: latest

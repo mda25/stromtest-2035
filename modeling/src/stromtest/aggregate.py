@@ -136,9 +136,16 @@ def aggregate(
 def _load_busmap_zone_lookup(busmap_path: Path) -> dict[str, str]:
     """Read the busmap CSV and return {bus_id: zone}.
 
-    Both raw (7-column) and reduced (2-column) busmap CSVs are accepted —
-    the reduced form is produced by translate.py and uses ``cluster`` as the
-    zone column instead of ``zone``.
+    Accepts three CSV shapes:
+      - Raw committed busmap: columns ``bus_id, zone, voltage, lon, lat, ...``
+      - Reduced legacy form: ``bus_id, cluster`` (pre-PyPSA-1.x)
+      - Reduced PyPSA 1.x form: ``name, cluster`` (current; matches what
+        translate.py emits and what add_electricity expects)
+
+    Cluster values that PyPSA-Eur wrote may carry the ``DE0_`` prefix our
+    translate.py adds for country-prefix compatibility. We strip it so the
+    aggregator's downstream zone names stay short and frontend-friendly
+    (``50hertz`` not ``DE0_50hertz``).
     """
     import csv
 
@@ -148,8 +155,14 @@ def _load_busmap_zone_lookup(busmap_path: Path) -> dict[str, str]:
         for row in reader:
             zone = row.get("zone") or row.get("cluster")
             if zone is None:
-                raise ValueError(f"busmap row {row} has neither 'zone' nor 'cluster' column")
-            lookup[row["bus_id"]] = zone
+                raise ValueError(f"busmap row {row} has no 'zone' or 'cluster' column")
+            bus_id = row.get("bus_id") or row.get("name")
+            if bus_id is None:
+                raise ValueError(f"busmap row {row} has no 'bus_id' or 'name' column")
+            # Strip the DE0_ country-prefix we add in translate.py.
+            if zone.startswith("DE0_"):
+                zone = zone[len("DE0_") :]
+            lookup[bus_id] = zone
     return lookup
 
 
@@ -220,6 +233,32 @@ def _load_per_bus(network: pypsa.Network) -> pd.DataFrame:
     return grouped
 
 
+def _resolve_zone(bus_id: str, bus_to_zone: dict[str, str]) -> str:
+    """Map a PyPSA bus name to a friendly zone label.
+
+    Three cases, in order of preference:
+      1. Bus is in the busmap (raw entsoegridkit IDs like ``3371``).
+      2. Bus IS the cluster name (after clustering PyPSA's buses are named
+         after their cluster, e.g. ``DE0_50hertz``). Strip the ``DE0_``
+         country-prefix and any carrier-suffix (``" H2"``) to recover the
+         zone label. H2 buses sit at the same physical location as their
+         AC bus and aggregate to the same zone — the ``metric`` column
+         already disambiguates electrolyzer-derived storage values.
+      3. Fallback: ``unknown``.
+    """
+    zone = bus_to_zone.get(bus_id)
+    if zone is not None:
+        return zone
+    if bus_id.startswith("DE0_"):
+        suffix = bus_id[len("DE0_") :]
+        # Strip carrier-suffix that PyPSA-Eur appends to non-AC sector buses
+        # (" H2", " gas", " heat", etc.). The space-separated token after
+        # the zone name is the carrier; collapse to the zone.
+        space = suffix.find(" ")
+        return suffix[:space] if space != -1 else suffix
+    return "unknown"
+
+
 def _to_long(
     df: pd.DataFrame,
     bus_to_zone: dict[str, str],
@@ -235,7 +274,7 @@ def _to_long(
         return _to_long_two_level(df, bus_to_zone, metric)
     long = df.stack().reset_index().rename(columns={"level_1": "bus", 0: "value"})
     long.columns = ["snapshot", "bus", "value"]
-    long["zone"] = long["bus"].map(bus_to_zone).fillna("unknown")
+    long["zone"] = long["bus"].apply(lambda b: _resolve_zone(b, bus_to_zone))
     long["technology"] = "load"  # caller can re-label via metric
     long["metric"] = metric
     return long[["snapshot", "zone", "technology", "metric", "value"]]
@@ -258,7 +297,7 @@ def _to_long_two_level(
     )
     long.columns = ["snapshot", "bus", "carrier", "value"]
     long = long.dropna(subset=["value"])
-    long["zone"] = long["bus"].map(bus_to_zone).fillna("unknown")
+    long["zone"] = long["bus"].apply(lambda b: _resolve_zone(b, bus_to_zone))
     long["technology"] = long["carrier"]
     long["metric"] = metric
     return long[["snapshot", "zone", "technology", "metric", "value"]]

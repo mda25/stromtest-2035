@@ -167,14 +167,19 @@ class TestCapacitiesJsonShape:
 
 
 class TestBusmapCopy:
-    """The pipeline-side busmap CSV must contain bus_id + cluster only."""
+    """The pipeline-side busmap CSV must contain name + cluster only.
+
+    'name' is the PyPSA 1.x convention that add_electricity.attach_load
+    requires when reading the busmap back; emitting 'bus_id' would crash
+    that step with KeyError.
+    """
 
     def test_busmap_columns(self, reiche: Scenario, tmp_path: Path) -> None:
         translate(reiche, tmp_path)
         with (tmp_path / "busmap.csv").open() as f:
             reader = csv.reader(f)
             header = next(reader)
-            assert header == ["bus_id", "cluster"]
+            assert header == ["name", "cluster"]
 
     def test_busmap_row_count_matches_source(self, reiche: Scenario, tmp_path: Path) -> None:
         translate(reiche, tmp_path)
@@ -188,7 +193,14 @@ class TestBusmapCopy:
         with (tmp_path / "busmap.csv").open() as f:
             rows = list(csv.DictReader(f))
         clusters = {r["cluster"] for r in rows}
-        assert clusters == {"50hertz", "tennet", "amprion", "transnetbw"}
+        # DE0_ prefix added for PyPSA-Eur's country-prefix matching in
+        # build_powerplants.map_to_country_bus.
+        assert clusters == {
+            "DE0_50hertz",
+            "DE0_tennet",
+            "DE0_amprion",
+            "DE0_transnetbw",
+        }
 
     def test_busmap_missing_source_raises(self, reiche: Scenario, tmp_path: Path) -> None:
         nonexistent = tmp_path / "does_not_exist.csv"
