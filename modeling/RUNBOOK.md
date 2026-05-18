@@ -53,7 +53,7 @@ pixi run snakemake --configfile config/test/config.electricity.yaml -j2 solve_el
 Success criterion: `results/test-elec/networks/base_s_5_elec_.nc` exists and
 opens with `pypsa.Network.import_from_netcdf(...)`. 39 of 39 jobs reported done.
 
-## Smoke test 2 — DE tutorial (exercises CDS + entsoegridkit)
+## Smoke test 2 — DE tutorial with k-means clustering (no CDS for cutout — wait, CDS IS used)
 
 The first validated **German** end-to-end run. ~7 min total. Builds a small
 DE-only cutout via CDS for the test snapshot range, uses the entsoegridkit
@@ -80,6 +80,64 @@ powerplantmatching):**
 | lignite   |  41.6  |
 | offwind   |  39.0  |
 | total load|  413.3 |
+
+## Smoke test 3 — DE tutorial with our 4-zone ÜNB custom busmap
+
+Same as smoke test 2 but with `clustering.mode: custom_busmap` so the
+network clusters by the four ÜNB Regelzonen instead of geometric k-means.
+The resulting bus names are `50hertz`, `tennet`, `amprion`, `transnetbw`.
+
+**Two-step prep** (the second step is necessary because `simplify_network`
+creates ~117 new buses not present in the raw entsoegridkit list):
+
+```bash
+cd modeling/pypsa_eur
+
+# 1. Build base + simplify so we know which bus IDs the clustering step needs.
+pixi run snakemake --configfile config/config.de-tutorial-custom-busmap.yaml \
+    -j2 resources/de-tutorial-cbm/networks/base_s.nc
+
+# 2. Extend the committed busmap to cover the new IDs (idempotent).
+pixi run python ../bin/extend_busmap_for_simplified.py \
+    resources/de-tutorial-cbm/networks/base_s.nc \
+    data/busmaps/base_s_4_entsoegridkit.csv
+
+# 3. Now cluster + solve.
+pixi run snakemake --configfile config/config.de-tutorial-custom-busmap.yaml \
+    -j2 solve_elec_networks
+```
+
+After step 2, `data/busmaps/base_s_4_entsoegridkit.csv` covers all 359
+simplified-network buses (242 from the original entsoegridkit 474 +
+117 simplification-created).
+
+Success criterion: `results/de-tutorial-cbm/networks/base_s_4_elec_.nc`
+has buses named `DE0_50hertz`, `DE0_tennet`, `DE0_amprion`,
+`DE0_transnetbw`. Inter-zone transmission line capacities (s_nom) are
+non-trivial (lines exist between all pairs of zones that physically
+connect).
+
+The `DE0_` prefix is mandatory — PyPSA-Eur's `build_powerplants.py`
+filters powerplants by `regions.index.str[:2] == country`, so cluster
+names not starting with the country code drop the entire powerplant
+fleet. Our aggregator strips `DE0_` when emitting zone names to the
+frontend, so the public-facing labels remain `50hertz`, `tennet`,
+`amprion`, `transnetbw`.
+
+**Verified per-zone dispatch (March 2013 week, baseline 2020 fleet
+mapped onto our 4 ÜNB clusters):**
+
+| Zone       | Gen (GWh) | Load (GWh) |
+|------------|----------:|-----------:|
+| 50hertz    |     125.6 |       61.6 |
+| amprion    |     100.1 |       84.8 |
+| tennet     |     140.8 |      201.1 |
+| transnetbw |      46.8 |       65.9 |
+| **total**  | **413.3** |  **413.3** |
+
+Matches DE's real north-south imbalance: 50Hertz is the dominant
+exporter (eastern wind), TenneT and TransnetBW are net importers
+(Bayern + BW demand exceeds local generation).
 
 ## Aggregating a solved network to Parquet
 

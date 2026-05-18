@@ -220,9 +220,21 @@ def _build_capacities_json(scenario: Scenario) -> dict[str, object]:
 def _build_busmap_for_pypsa(source_csv: Path) -> str:
     """Reduce the committed busmap CSV to PyPSA-Eur's expected 2-column format.
 
-    PyPSA-Eur's cluster_network.py reads a CSV indexed by bus_id with the
-    cluster name as the value column. Our committed unb_busmap.csv has extra
-    columns (lon, lat, bundesland, voltage, border_warning) which we strip.
+    Two compatibility requirements PyPSA-Eur imposes:
+
+    1. The bus-id column MUST be named ``name`` (PyPSA 1.x convention) — the
+       downstream ``add_electricity.py:attach_load`` does
+       ``set_index("name")`` and would otherwise crash with
+       ``KeyError: "None of ['name'] are in the columns"``.
+
+    2. The cluster value MUST start with the country code (``DE``) so
+       ``build_powerplants.py:map_to_country_bus`` matches them via
+       ``regions.index.str[:2] == country``. PyPSA's default k-means
+       names them ``DE0 0``, ``DE0 1``, etc. We prefix our four ÜNB zones
+       to ``DE0_50hertz``, ``DE0_tennet``, ``DE0_amprion``,
+       ``DE0_transnetbw``. The ``DE0_`` prefix is stripped when our
+       aggregator maps clusters back to friendly zone names for the
+       frontend.
     """
     if not source_csv.exists():
         raise FileNotFoundError(f"busmap source CSV not found: {source_csv}")
@@ -231,11 +243,11 @@ def _build_busmap_for_pypsa(source_csv: Path) -> str:
 
     out = StringIO()
     writer = csv.writer(out)
-    writer.writerow(["bus_id", "cluster"])
+    writer.writerow(["name", "cluster"])
     with source_csv.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            writer.writerow([row["bus_id"], row["zone"]])
+            writer.writerow([row["bus_id"], f"DE0_{row['zone']}"])
     return out.getvalue()
 
 
