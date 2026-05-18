@@ -1,0 +1,4741 @@
+{
+  "scenario_id": "reiche",
+  "scenario_version": "2026-05-17.0",
+  "weather_year": 2013,
+  "label": "Reiche 2035 fleet under March 2013 weather (smoke test \u2014 full Reiche weather year pending CDS build)",
+  "metadata": {
+    "n_snapshots": 7,
+    "n_buses": 8,
+    "row_counts": {
+      "daily": 574,
+      "hourly": 574,
+      "weekly": 164
+    }
+  },
+  "daily": [
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.5855113803
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.421000713066448e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.2574357134414995
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 6.178457122595988
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.100943905568706
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5882.932618140447
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.4783327021184385e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9356.080770174662
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 4325.339829918211
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 9559.284654808134
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 5726.101895731168
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6666724395620577e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.9150089067
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.703801689735497e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.2656676860138012
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 6.376024464331229
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0660735443294577
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6638.59054322515
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.49173194407761e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 12888.841681162516
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 1551.9401115786613
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 3633.3524533437812
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6753461556081793e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.564282387
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.506111615160953e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.277054620457127
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 6.649310890971047
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.06917692757444666
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6908.8843636012225
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.627821170911207e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.0503073243663
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 30565.471952756245
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 12091.229166434856
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 7673.524831768881
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 13156.20376519487
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.685871039215706e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.6820500516
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5938088065309394e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.22742029738405609
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 5.458087137217346
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.018445935686599496
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5850.422452139963
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.4322768754266544e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.75218884399203
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 10011.034161249796
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 261.854037324502
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 4816.858597223748
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6558263111674367e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.5854732366
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4052866225447515e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.08988094190597208
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 8.335599725781625
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.04107468296039388
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5883.695834047162
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.475238607143902e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 7799.025227228801
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 6.640678021704058
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.8166642667815497
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 9920.391211286244
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6770054769048095e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.914966498
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.65472110214295e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.2764322153507216
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 13.01039763472266
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.04408064530255565
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6639.410213394749
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.5533055304845094e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 10743.857804934183
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.5023410779706858
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 9864.967190573778
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6814870299889126e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.5642185356
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.461484835112135e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.5120136133364305
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 18.9376376113835
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.04293866444932651
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6909.702105931529
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.623640632334274e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.04592894350884
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 25478.711948076885
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.5368521918831292
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 5739.004114195724
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 20308.493223303794
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6862078932412203e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.6820213045
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5714746898141377e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.35480868956986844
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 13.973495689216156
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.05448778916675723
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5851.504515626463
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.5189768927276794e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.7476032938327615
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 8344.980117797852
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.760573880394836
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 6499.3556782992055
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.672076939986267e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.585455112
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4066838618663147e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.22019222653746923
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 13.620213160114066
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0818717361976094
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5885.434157774238
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.47769782250445e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 7245.074214617412
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 5.755656749396234
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.8199594458497923
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 6083.486312678401
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6771796104007815e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.914945195
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.6568577134645648e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.14116745550068505
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 16.398416568658348
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.004149741932365114
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6639.019879203935
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.5537963890060156e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9980.740529696146
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.5898604159302793
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 5840.098190414424
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.682060095140659e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.564211777
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4623473102275175e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.14618751835532592
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 22.44613805219064
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.06846020411167925
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6911.128435062248
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.629932895198169e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.045875506447075
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 23669.00396156311
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.6939467627170057
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 9155.155620851987
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 18762.409277277176
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.687119063007709e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.682010424
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.573612605379026e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.13165474297259774
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 17.133209522992164
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.17272011062382203
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5855.458098750594
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.519740140107976e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.747559094582921
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 7752.250890096028
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.7486037510092495
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 8771.736230002105
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6721771556776636e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.5854250025
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4114666253246166e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.11647938093683693
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 16.415718300094245
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.10060430576165075
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5887.6245729327675
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.4817526146791006e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9307.964484214783
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 5.637781978556704
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.7369450933682565
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 11410.863780154874
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6769300874846685e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.914926408
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.667784519376528e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.012670125837216772
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 16.094333550533992
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.1119490440406157
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6641.48483916684
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.552595577207532e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 12822.557176272074
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.6819162711560108
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 12499.439557160578
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.682703964523899e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.564208751
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.468287194940157e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0033680590786288322
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 22.526971470625053
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.08630344025956424
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6912.985641182508
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.637647998764239e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.045876023314342
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 30408.28039932251
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.6983898790553924
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 3800.2394326656517
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 25348.627606701597
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.688895233788071e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.6819938836
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5801060002611183e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.03631808992346952
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 18.004843683556103
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0051808921334111635
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5855.298427735828
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.518268219974644e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.747564247442261
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9959.549588521322
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.7875883679286869
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 9404.543708841142
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6714072310711403e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.585388341
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4077578329029635e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.025317684205094476
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 15.808093876372919
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.03628811852416047
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5888.272821863993
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.4788007697577126e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9267.478887875875
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 6.969177890065248
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.9332146312015462
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 12083.681054037768
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6771664620226687e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.9149110625
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.6587818232041115e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.050745588248054446
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 14.87643943449672
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.012195926722169431
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6641.541758917446
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.553585790211395e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 12766.784625689188
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 1.00565703470791
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 12303.583963047387
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6822418576542664e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.5641609486
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4634710456098615e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.07826411082011794
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 20.648632811409744
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.03218733812882682
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6913.546966073772
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.6335180129019295e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.045992821222246
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 30276.01759179433
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.5100845887263048
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 2191.969024661739
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 26853.919963470707
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6876331370035698e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.6819798257
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5751275021138898e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.04842647114137813
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 16.84260837794375
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.061108806973078106
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5856.539229933251
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.5191502486210066e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.74762276069161
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9916.229882558187
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.8440724667900322
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 8756.507165699424
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6719622450456076e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.585395372
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4173035083341574e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.32145438451127895
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 8.093188645558007
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.12825267244502617
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5884.944282678932
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.4858947462875534e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9308.91916847229
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 1414.7035796006708
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 1164.36073461744
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 11651.189286566898
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.676826425200827e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.914907177
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.6872070328334546e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.015070058047634456
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 15.23812082965793
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.11361527545582387
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6638.579542322421
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.551005539611307e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 12823.872342427572
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 24.552450826831414
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 11324.348150630192
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.683497170912859e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.5641829
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4794480942409527e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.20390424972770507
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 15.754930818598837
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.14214836190102198
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6909.883042235735
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.664100337907456e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.05070433180576
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 30411.399271647137
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 33.330909334936834
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 6876.815587270867
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 23023.37543382485
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6911616709241038e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.6819769754
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5887344564800522e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.09831192297879407
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 14.483122228028616
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.29108353913181034
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5849.207896607597
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.515312228170476e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.752667003003891
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9960.571112632751
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 787.0101657132341
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 6177.22288232919
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6701735210852716e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2197146.5853471956
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4035753502594984e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.2799548725495471
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 1.3742717019095165
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.03645728396606446
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5885.597165173649
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.472299754013381e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9270.827116966248
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 2183.2353384360104
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.5495971181373733
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 5846.347810578324
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "50hertz",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.676931248585162e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2527503.9148702268
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.6517770742896505e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.5752633639744397
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 1.431800096331309
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.0844245475638761
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6640.416156067471
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.553233146982935e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 12771.39711411794
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.7519507310586703
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 4125.016729778047
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "amprion",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.6808418429642255e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2305492.5641248305
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.4595983963410496e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.6092453294369091
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 1.1330429124675716
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.045531145343828544
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 6910.762943546045
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.613989122460382e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 19.046363559447368
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 30286.955961545307
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.6078259677222813
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "offwind-dc",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "offwind-float",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 27902.73273016927
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 14764.380449244452
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "tennet",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.685005036623891e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "CCGT",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "H2",
+      "metric": "storage_soc_mwh",
+      "value": 2475961.681907892
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "OCGT",
+      "metric": "generation_mwh",
+      "value": 1.5689409199614028e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_charge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_discharge_mwh",
+      "value": 0.5526739632236959
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "PHS",
+      "metric": "storage_soc_mwh",
+      "value": 1.2189471132170813
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_charge_mwh",
+      "value": 0.08715854509343121
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_discharge_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "battery",
+      "metric": "storage_soc_mwh",
+      "value": 5851.070569609455
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "biomass",
+      "metric": "generation_mwh",
+      "value": 4.5190081213466046e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "coal",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "geothermal",
+      "metric": "generation_mwh",
+      "value": 7.7480758048900835
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "lignite",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "load",
+      "metric": "load_mwh",
+      "value": 9919.812496185303
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "offwind-ac",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "oil",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "onwind",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "solar",
+      "metric": "generation_mwh",
+      "value": 7397.054319444242
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "solar-hsat",
+      "metric": "generation_mwh",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "zone": "transnetbw",
+      "technology": "waste",
+      "metric": "generation_mwh",
+      "value": 2.672330441131428e-05
+    }
+  ],
+  "stacked_generation_daily": [
+    {
+      "snapshot": "2013-03-01",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "OCGT",
+      "value": 6.224722824493837e-05
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "biomass",
+      "value": 0.0001803016269253391
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "offwind-ac",
+      "value": 16416.568996353068
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "onwind",
+      "value": 19046.60363548018
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "solar",
+      "value": 27332.51671149357
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "waste",
+      "value": 0.0001068371594555338
+    },
+    {
+      "snapshot": "2013-03-01",
+      "technology": "geothermal",
+      "value": 26.80249616835833
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "OCGT",
+      "value": 6.092967249613974e-05
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "biomass",
+      "value": 0.00018171161662690365
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "offwind-ac",
+      "value": 7.177530213587188
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "onwind",
+      "value": 5741.083693420871
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "solar",
+      "value": 46593.207303463016
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "waste",
+      "value": 0.00010716777340121209
+    },
+    {
+      "snapshot": "2013-03-02",
+      "technology": "geothermal",
+      "value": 26.7935322373416
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "OCGT",
+      "value": 6.0995014909374226e-05
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "biomass",
+      "value": 0.0001818116724681661
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "offwind-ac",
+      "value": 6.44960351211324
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "onwind",
+      "value": 9157.314044464776
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "solar",
+      "value": 39457.730010372106
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "waste",
+      "value": 0.00010718535924226813
+    },
+    {
+      "snapshot": "2013-03-03",
+      "technology": "geothermal",
+      "value": 26.793434601029997
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "OCGT",
+      "value": 6.12764433990242e-05
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "biomass",
+      "value": 0.00018190264410625516
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "offwind-ac",
+      "value": 6.336171857612096
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "onwind",
+      "value": 3802.4458823981045
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "solar",
+      "value": 58663.47465285819
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "waste",
+      "value": 0.00010719936516867778
+    },
+    {
+      "snapshot": "2013-03-04",
+      "technology": "geothermal",
+      "value": 26.793440270756605
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "OCGT",
+      "value": 6.105138203830826e-05
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "biomass",
+      "value": 0.00018185054821492043
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "offwind-ac",
+      "value": 7.479262478791553
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "onwind",
+      "value": 2194.751968794438
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "solar",
+      "value": 59997.692146255285
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "waste",
+      "value": 0.00010719003701726112
+    },
+    {
+      "snapshot": "2013-03-05",
+      "technology": "geothermal",
+      "value": 26.793615581913855
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "OCGT",
+      "value": 6.172693091888618e-05
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "biomass",
+      "value": 0.0001821631285197679
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "offwind-ac",
+      "value": 1448.0344889356077
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "onwind",
+      "value": 8852.738938428372
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "solar",
+      "value": 52176.13575335113
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "waste",
+      "value": 0.00010721658788123062
+    },
+    {
+      "snapshot": "2013-03-06",
+      "technology": "geothermal",
+      "value": 26.803371334809654
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "OCGT",
+      "value": 6.083891740851601e-05
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "biomass",
+      "value": 0.00018158530144803304
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "lignite",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "offwind-ac",
+      "value": 2183.8431644037328
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "onwind",
+      "value": 27904.034278018466
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "solar",
+      "value": 32132.799309045065
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "waste",
+      "value": 0.00010715108569304706
+    },
+    {
+      "snapshot": "2013-03-07",
+      "technology": "geothermal",
+      "value": 26.79443936433745
+    }
+  ],
+  "national_totals": [
+    {
+      "metric": "storage_soc_mwh",
+      "technology": "H2",
+      "value": 66542733.2258616
+    },
+    {
+      "metric": "load_mwh",
+      "technology": "load",
+      "value": 413313.69047959644
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "solar",
+      "value": 316353.55588683835
+    },
+    {
+      "metric": "storage_soc_mwh",
+      "technology": "battery",
+      "value": 177023.93907294542
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "onwind",
+      "value": 76698.9724410052
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "offwind-ac",
+      "value": 20075.889217754513
+    },
+    {
+      "metric": "storage_soc_mwh",
+      "technology": "PHS",
+      "value": 348.46205343097614
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "geothermal",
+      "value": 187.5743295585475
+    },
+    {
+      "metric": "storage_charge_mwh",
+      "technology": "PHS",
+      "value": 3.0711513088121243
+    },
+    {
+      "metric": "storage_discharge_mwh",
+      "technology": "PHS",
+      "value": 2.856232066654232
+    },
+    {
+      "metric": "storage_charge_mwh",
+      "technology": "battery",
+      "value": 1.205023227322821
+    },
+    {
+      "metric": "storage_discharge_mwh",
+      "technology": "battery",
+      "value": 0.9338899040252573
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "biomass",
+      "value": 0.0012713265383093855
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "waste",
+      "value": 0.0007499473678592306
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "OCGT",
+      "value": 0.00042906558941518697
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "solar-hsat",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "CCGT",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "oil",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "offwind-float",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "offwind-dc",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "coal",
+      "value": 0.0
+    },
+    {
+      "metric": "generation_mwh",
+      "technology": "lignite",
+      "value": 0.0
+    }
+  ],
+  "per_zone_totals": [
+    {
+      "zone": "50hertz",
+      "metric": "generation_mwh",
+      "value": 81397.84576312723
+    },
+    {
+      "zone": "50hertz",
+      "metric": "storage_soc_mwh",
+      "value": 15421294.424990784
+    },
+    {
+      "zone": "50hertz",
+      "metric": "storage_charge_mwh",
+      "value": 0.9802843902316567
+    },
+    {
+      "zone": "50hertz",
+      "metric": "storage_discharge_mwh",
+      "value": 0.8559235192796527
+    },
+    {
+      "zone": "50hertz",
+      "metric": "load_mwh",
+      "value": 61555.36986955007
+    },
+    {
+      "zone": "amprion",
+      "metric": "generation_mwh",
+      "value": 61170.83114546813
+    },
+    {
+      "zone": "amprion",
+      "metric": "storage_soc_mwh",
+      "value": 17739089.87300035
+    },
+    {
+      "zone": "amprion",
+      "metric": "storage_charge_mwh",
+      "value": 0.9509875785420592
+    },
+    {
+      "zone": "amprion",
+      "metric": "storage_discharge_mwh",
+      "value": 0.8225176397773576
+    },
+    {
+      "zone": "amprion",
+      "metric": "load_mwh",
+      "value": 84798.05127429962
+    },
+    {
+      "zone": "tennet",
+      "metric": "generation_mwh",
+      "value": 217817.78989970448
+    },
+    {
+      "zone": "tennet",
+      "metric": "storage_soc_mwh",
+      "value": 16186932.93955233
+    },
+    {
+      "zone": "tennet",
+      "metric": "storage_charge_mwh",
+      "value": 1.2140446035207375
+    },
+    {
+      "zone": "tennet",
+      "metric": "storage_discharge_mwh",
+      "value": 1.1027389794602007
+    },
+    {
+      "zone": "tennet",
+      "metric": "load_mwh",
+      "value": 201095.84108670554
+    },
+    {
+      "zone": "transnetbw",
+      "metric": "generation_mwh",
+      "value": 52929.527517196264
+    },
+    {
+      "zone": "transnetbw",
+      "metric": "storage_soc_mwh",
+      "value": 17372788.38944451
+    },
+    {
+      "zone": "transnetbw",
+      "metric": "storage_charge_mwh",
+      "value": 1.1308579638404916
+    },
+    {
+      "zone": "transnetbw",
+      "metric": "storage_discharge_mwh",
+      "value": 1.0089418321622778
+    },
+    {
+      "zone": "transnetbw",
+      "metric": "load_mwh",
+      "value": 65864.42824904124
+    }
+  ]
+}

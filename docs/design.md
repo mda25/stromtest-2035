@@ -18,6 +18,7 @@ Working title: *Energiewende Stress Tester* (final name `stromtest-2035`)
 - [x] Step 7 (partial) — `stromtest.apply.apply_translation` + `stromtest apply` CLI wires translate-output bundles into a PyPSA-Eur tree (config merge, busmap copy, provenance drop). 10 tests cover happy-path, rejection of bad inputs, and idempotence. Per-zone capacity injection mechanism (custom_powerplants.csv / extendable_carriers / regional constraints) still pending — that is the actual "make the LP solve our scenario's fleet" piece.
 - [ ] Step 8 — CI mini end-to-end run
 - [x] Step 9 (partial) — Scenarios viewer in Next.js: `/scenarios` list, `/scenarios/[family]` detail with per-zone tables + cited sources, `/scenarios/compare` side-by-side. Reads committed YAMLs at build time via Server Components. Local dev only for now; Vercel deploy needs a monorepo config later.
+- [x] Step 9b — **Dispatch viewer in the frontend.** `modeling/bin/build_dispatch_json.py` converts a solved PyPSA NetCDF into `web/src/data/dispatch/<scenario>.json` (~109 KB for our smoke test). The scenario family page renders a Recharts stacked-area chart of daily generation by carrier, a national totals table, and a per-zone gen/load/net balance table. Falls back to a clear "no dispatch committed" message for scenarios without a solve. Server-only fs loader split from client-safe types+helpers; `server-only` package enforces the boundary.
 - [ ] Step 7 — Hydrogen efficiency override + benchmark test
 - [ ] Step 8 — CI mini end-to-end
 - [ ] Step 9 — Minimal frontend wired to real data
