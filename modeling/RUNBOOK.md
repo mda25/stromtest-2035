@@ -139,6 +139,66 @@ Matches DE's real north-south imbalance: 50Hertz is the dominant
 exporter (eastern wind), TenneT and TransnetBW are net importers
 (Bayern + BW demand exceeds local generation).
 
+## Smoke test 4 — full Reiche scenario solve (capacity injection)
+
+End-to-end: scenario YAML → translation bundle → applied to PyPSA-Eur →
+prepared network → **capacity injection** → solve. The solve runs the
+Reiche 2035 fleet (138 GW wind onshore, 40 GW offshore, 292 GW solar,
+20 GW gas backup, 15 GW electrolyzer, etc.) against PyPSA-Eur's
+weather + demand inputs.
+
+```bash
+cd modeling
+
+# 1. Translate + apply (see "Applying a stromtest scenario" above).
+uv run stromtest translate scenarios/reiche/2026-05-17.0.yml /tmp/reiche-bundle --weather-year 2010
+uv run stromtest apply /tmp/reiche-bundle pypsa_eur/
+
+cd pypsa_eur
+
+# 2. Build network up to prepare_network. With our cached cutout this
+#    is ~30s; first-ever run downloads the cutout via CDS (~10 min).
+pixi run snakemake --configfile config/config.de-tutorial-custom-busmap.yaml \
+    -j2 resources/de-tutorial-cbm/networks/base_s.nc
+pixi run python ../bin/extend_busmap_for_simplified.py \
+    resources/de-tutorial-cbm/networks/base_s.nc \
+    data/busmaps/base_s_4_entsoegridkit.csv
+pixi run snakemake --configfile config/config.de-tutorial-custom-busmap.yaml \
+    -j2 resources/de-tutorial-cbm/networks/base_s_4_elec_.nc
+
+# 3. Inject the scenario's per-zone capacities into the prepared network.
+PYTHONPATH=../src pixi run python -m stromtest.cli inject \
+    resources/de-tutorial-cbm/networks/base_s_4_elec_.nc \
+    .stromtest/capacities.json
+
+# 4. Solve against the injected fleet.
+pixi run snakemake --configfile config/config.de-tutorial-custom-busmap.yaml \
+    -j2 results/de-tutorial-cbm/networks/base_s_4_elec_.nc --rerun-incomplete
+```
+
+**Verified one-week dispatch (March 2013 weather + load, Reiche 2035
+fleet injected):**
+
+| Carrier   | National GWh |
+|-----------|-------------:|
+| solar     |       316.4  |
+| onwind    |        76.7  |
+| offwind   |        20.1  |
+| geothermal|         0.2  |
+| coal      |         0.0  |
+| lignite   |         0.0  |
+| OCGT      |         0.0  |
+| CCGT      |         0.0  |
+| **total** |    **413.3** |
+
+100% renewable dispatch — exactly the pattern Reiche's 2035 fleet
+implies for a normal March week (sunny + windy, no Dunkelflaute). Gas
+backup unused; LP would lean on it during a Dunkelflaute test year
+(2010), which the current tutorial config doesn't cover. The
+gap-to-headline-result is now just snapshot range + cutout: re-running
+with snapshots in 2010 and a 2010 cutout produces the actual headline
+"Reiche under Dunkelflaute" stress test.
+
 ## Aggregating a solved network to Parquet
 
 Once you have a solved `.nc` file:

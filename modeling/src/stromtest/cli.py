@@ -12,6 +12,7 @@ from pathlib import Path
 import click
 
 from stromtest.apply import apply_translation
+from stromtest.inject_capacities import inject_capacities
 from stromtest.translation.schema import Scenario
 from stromtest.translation.translate import translate as do_translate
 
@@ -101,6 +102,38 @@ def apply(
     click.echo(f"  busmap:    {result.busmap_path}")
     click.echo(f"  capacities: {result.capacities_json_path}")
     click.echo(f"  manifest:  {result.manifest_path}")
+
+
+@main.command()
+@click.argument("network_path", type=click.Path(exists=True, path_type=Path))
+@click.argument("capacities_path", type=click.Path(exists=True, path_type=Path))
+def inject(network_path: Path, capacities_path: Path) -> None:
+    """Inject a scenario's per-zone capacities into a prepared PyPSA network.
+
+    NETWORK_PATH is typically ``resources/{run}/networks/base_s_4_elec_.nc``
+    after PyPSA-Eur's ``prepare_network`` rule. The network is mutated in
+    place; ``solve_network`` is what comes next.
+
+    CAPACITIES_PATH is the ``capacities.json`` produced by ``stromtest translate``.
+
+    Requires the ``modeling`` dependency group (pypsa). Run via pixi:
+
+        pixi run python -m stromtest.cli inject base_s_4_elec_.nc capacities.json
+    """
+    result = inject_capacities(network_path, capacities_path)
+    click.echo(f"OK: injected {capacities_path} into {result.network_path}")
+    click.echo(
+        f"  generators set:    {result.generators_set}"
+        f"  generators zeroed: {result.generators_zeroed}"
+    )
+    click.echo(f"  storage units set: {result.storage_units_set}")
+    click.echo(f"  stores set:        {result.stores_set}")
+    click.echo(f"  links set:         {result.links_set}")
+    click.echo("Per-zone summary (GW):")
+    for zone, block in result.summary_by_zone_gw.items():
+        click.echo(f"  {zone}:")
+        for k, v in block.items():
+            click.echo(f"    {k:30s} {v}")
 
 
 if __name__ == "__main__":
