@@ -1,38 +1,38 @@
 /**
  * Server-only dispatch loader.
  *
- * Reads from per-scenario JSON files at src/data/dispatch/{family}.json,
- * built at modeling-pipeline time by ``modeling/bin/build_dispatch_json.py``.
+ * Uses direct TypeScript JSON imports rather than fs.readFile so the
+ * bundles get traced by Next.js into the build output reliably. Same
+ * pattern as src/data/scenarios.json — survives Vercel monorepo / Output
+ * File Tracing quirks.
+ *
+ * Adding a new dispatch: drop the JSON under src/data/dispatch/, then
+ * add an import here and a line in DISPATCH_BY_FAMILY.
  *
  * Client-safe types + transforms live in `./dispatch-utils.ts` — import
- * from there in Client Components. This file is server-only because it
- * uses `node:fs`.
+ * from there in Client Components.
  */
-
-import "server-only";
-import fs from "node:fs";
-import path from "node:path";
 
 import type { DispatchBundle } from "./dispatch-utils";
 
-const DISPATCH_DIR = path.resolve(process.cwd(), "src", "data", "dispatch");
+// Per-family dispatch JSONs. Each entry corresponds to one committed
+// solved-run bundle under web/src/data/dispatch/.
+import reicheDispatch from "@/data/dispatch/reiche.json";
+
+const DISPATCH_BY_FAMILY: Record<string, DispatchBundle | undefined> = {
+  reiche: reicheDispatch as unknown as DispatchBundle,
+};
 
 export function loadDispatchForFamily(family: string): DispatchBundle | null {
-  const filepath = path.join(DISPATCH_DIR, `${family}.json`);
-  if (!fs.existsSync(filepath)) return null;
-  const raw = fs.readFileSync(filepath, "utf-8");
-  return JSON.parse(raw) as DispatchBundle;
+  return DISPATCH_BY_FAMILY[family] ?? null;
 }
 
 export function listFamiliesWithDispatch(): string[] {
-  if (!fs.existsSync(DISPATCH_DIR)) return [];
-  return fs
-    .readdirSync(DISPATCH_DIR)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => f.replace(/\.json$/, ""));
+  return Object.keys(DISPATCH_BY_FAMILY).filter(
+    (k) => DISPATCH_BY_FAMILY[k] !== undefined,
+  );
 }
 
-// Re-export client-safe types for callers that want a single import.
 export type {
   DispatchBundle,
   DispatchRow,
