@@ -17,9 +17,20 @@ machine. CI does NOT run PyPSA-Eur — these steps run on your laptop.
 ## One-time setup
 
 ```bash
+# 1. Install the PyPSA-Eur conda env (~5-10 min on first run; ~1-2 GB).
 cd modeling/pypsa_eur
-pixi install   # ~5-10 min on first run; ~1-2 GB env
+pixi install
+
+# 2. Apply our patches + copy test configs into pypsa_eur/.
+cd ..
+bash bin/setup_pypsa_eur.sh
 ```
+
+Patches applied (see [patches/](patches/)):
+- `pypsa_eur-build-cutout.patch` — fix for `TypeError` when building cutouts via CDS.
+
+Configs copied (see [configs/](configs/)):
+- `de-tutorial.yaml` — small DE-only smoke-test config used below.
 
 Verify the environment:
 
@@ -29,10 +40,10 @@ pixi run python -c "import pypsa; import atlite; import linopy; print(pypsa.__ve
 
 Expected: PyPSA 1.2.0, atlite 0.6.1, linopy 0.6.6 (pinned via pixi.lock).
 
-## Smoke test — Belgium tutorial
+## Smoke test 1 — Belgium tutorial (no CDS)
 
-The smallest validated end-to-end run. ~4 min total including all data
-downloads from data.pypsa.org. No CDS needed.
+PyPSA-Eur's own minimal config. ~4 min total. Pre-built BE cutout is on
+data.pypsa.org so no CDS needed.
 
 ```bash
 cd modeling/pypsa_eur
@@ -41,6 +52,34 @@ pixi run snakemake --configfile config/test/config.electricity.yaml -j2 solve_el
 
 Success criterion: `results/test-elec/networks/base_s_5_elec_.nc` exists and
 opens with `pypsa.Network.import_from_netcdf(...)`. 39 of 39 jobs reported done.
+
+## Smoke test 2 — DE tutorial (exercises CDS + entsoegridkit)
+
+The first validated **German** end-to-end run. ~7 min total. Builds a small
+DE-only cutout via CDS for the test snapshot range, uses the entsoegridkit
+base network (no OSM download), 4 default k-means clusters.
+
+```bash
+cd modeling/pypsa_eur
+pixi run snakemake --configfile config/config.de-tutorial.yaml -j2 solve_elec_networks
+```
+
+Success criterion: `results/de-tutorial/networks/base_s_4_elec_.nc` exists,
+7 daily snapshots (2013-03-01..2013-03-07), 4 buses (`DE0 0..3`), generation
+mix dominated by coal + onwind + biomass + solar.
+
+**Verified one-week dispatch (March 2013, baseline 2020 fleet from
+powerplantmatching):**
+
+| Carrier   | GWh    |
+|-----------|-------:|
+| coal      | 116.7  |
+| onwind    | 107.6  |
+| biomass   |  55.1  |
+| solar     |  53.1  |
+| lignite   |  41.6  |
+| offwind   |  39.0  |
+| total load|  413.3 |
 
 ## Aggregating a solved network to Parquet
 
