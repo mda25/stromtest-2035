@@ -199,6 +199,35 @@ gap-to-headline-result is now just snapshot range + cutout: re-running
 with snapshots in 2010 and a 2010 cutout produces the actual headline
 "Reiche under Dunkelflaute" stress test.
 
+## Publishing a dispatch run to the frontend
+
+After a successful solve, convert the result into a frontend-shape JSON
+that the scenarios viewer (web/) reads at build time:
+
+```bash
+cd modeling/pypsa_eur
+pixi run python ../bin/build_dispatch_json.py \
+    --scenario-id reiche \
+    --scenario-version 2026-05-17.0 \
+    --weather-year 2013 \
+    --label "Reiche 2035 fleet under March 2013 weather (smoke test)" \
+    --network results/de-tutorial-cbm/networks/base_s_4_elec_.nc \
+    --busmap  data/busmaps/base_s_4_entsoegridkit.csv
+```
+
+This writes:
+
+- `web/src/data/dispatch/<scenario_id>.json` — committed; the
+  frontend reads it via Next.js Server Components at build time
+- `web/src/data/dispatch/<scenario_id>.daily.parquet` — raw daily data
+  for downstream analysis (committed but not served as static asset)
+
+After the JSON is committed, `/scenarios/<family>` shows a dispatch
+panel with a stacked-area chart of daily generation, national totals
+per carrier, and a per-zone generation/load/net balance table.
+Scenarios without a committed dispatch JSON show a fallback message
+explaining how to produce one.
+
 ## Aggregating a solved network to Parquet
 
 Once you have a solved `.nc` file:

@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { DispatchPanel } from "@/components/dispatch/dispatch-panel";
+import { loadDispatchForFamily } from "@/lib/dispatch";
 import {
   type ScenarioFile,
   type ZoneCapacities,
@@ -38,6 +40,7 @@ export default async function ScenarioFamilyPage({ params }: Props) {
   if (files.length === 0) notFound();
   const latest = files[0];
   const s = latest.scenario;
+  const dispatch = loadDispatchForFamily(family);
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12">
       <div className="flex items-center gap-3 text-sm">
@@ -77,6 +80,35 @@ export default async function ScenarioFamilyPage({ params }: Props) {
       <ZoneTable file={latest} />
 
       <DemandCard file={latest} />
+
+      {dispatch ? (
+        <>
+          <Separator />
+          <DispatchPanel bundle={dispatch} />
+        </>
+      ) : (
+        <Card>
+          <CardHeader>
+            <CardTitle>Dispatch</CardTitle>
+            <CardDescription>
+              No solved dispatch committed for this scenario yet. Run the
+              PyPSA-Eur pipeline + capacity injection (see
+              <code className="mx-1 rounded bg-muted px-1.5 py-0.5">
+                modeling/RUNBOOK.md
+              </code>{" "}
+              smoke test 4) and run{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5">
+                bin/build_dispatch_json.py
+              </code>{" "}
+              to populate{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5">
+                web/src/data/dispatch/{family}.json
+              </code>
+              .
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      )}
 
       <SourcesList file={latest} />
 
