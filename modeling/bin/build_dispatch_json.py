@@ -86,12 +86,19 @@ def _build_payload(result, args) -> dict:
     import pandas as pd
 
     daily = pd.read_parquet(result.daily_path)
+    hourly = pd.read_parquet(result.hourly_path)
     metadata = json.loads(result.metadata_path.read_text())
 
     # Daily rows ready for the frontend (string dates, sorted).
     daily = daily.sort_values(["snapshot", "zone", "technology", "metric"]).copy()
     daily["snapshot"] = pd.to_datetime(daily["snapshot"]).dt.strftime("%Y-%m-%d")
     daily_rows = daily.to_dict(orient="records")
+
+    # Hourly snapshots — full ISO timestamps, sorted.
+    hourly = hourly.sort_values(["snapshot", "zone", "technology", "metric"]).copy()
+    hourly["snapshot"] = pd.to_datetime(hourly["snapshot"]).dt.strftime(
+        "%Y-%m-%dT%H:%M"
+    )
 
     # National totals per (metric, technology) — for headline tables.
     nat = (
@@ -111,13 +118,34 @@ def _build_payload(result, args) -> dict:
     )
 
     # Daily aggregated to (snapshot, technology) — national stacked-area shape.
-    stacked = (
+    stacked_daily = (
         daily[daily["metric"] == "generation_mwh"]
         .groupby(["snapshot", "technology"], sort=False)["value"]
         .sum()
         .reset_index()
         .to_dict(orient="records")
     )
+
+    # Hourly stacked generation: national, per timestep + carrier.
+    stacked_hourly = (
+        hourly[hourly["metric"] == "generation_mwh"]
+        .groupby(["snapshot", "technology"], sort=False)["value"]
+        .sum()
+        .reset_index()
+        .to_dict(orient="records")
+    )
+
+    # Per-zone per-hour totals for gen + load (drives the map's animation).
+    per_zone_hourly = (
+        hourly[hourly["metric"].isin(["generation_mwh", "load_mwh"])]
+        .groupby(["snapshot", "zone", "metric"], sort=False)["value"]
+        .sum()
+        .reset_index()
+        .to_dict(orient="records")
+    )
+
+    # Sorted list of unique snapshot timestamps for the slider.
+    snapshots_hourly = sorted(hourly["snapshot"].unique().tolist())
 
     return {
         "scenario_id": args.scenario_id,
@@ -128,9 +156,13 @@ def _build_payload(result, args) -> dict:
             "n_snapshots": metadata.get("n_snapshots"),
             "n_buses": metadata.get("n_buses"),
             "row_counts": metadata.get("row_counts"),
+            "n_hourly_snapshots": len(snapshots_hourly),
         },
         "daily": daily_rows,
-        "stacked_generation_daily": stacked,
+        "stacked_generation_daily": stacked_daily,
+        "stacked_generation_hourly": stacked_hourly,
+        "per_zone_hourly": per_zone_hourly,
+        "hourly_snapshots": snapshots_hourly,
         "national_totals": nat,
         "per_zone_totals": per_zone_totals,
     }

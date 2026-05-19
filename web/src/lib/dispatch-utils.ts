@@ -32,6 +32,14 @@ export interface ZoneTotalRow {
   value: number;
 }
 
+/** Per-(zone, metric) value at a single hourly snapshot. */
+export interface PerZoneHourlyRow {
+  snapshot: string;
+  zone: string;
+  metric: string;
+  value: number;
+}
+
 export interface DispatchBundle {
   scenario_id: string;
   scenario_version: string;
@@ -40,10 +48,14 @@ export interface DispatchBundle {
   metadata: {
     n_snapshots?: number;
     n_buses?: number;
+    n_hourly_snapshots?: number;
     row_counts?: Record<string, number>;
   };
   daily: DispatchRow[];
   stacked_generation_daily: StackedRow[];
+  stacked_generation_hourly?: StackedRow[];
+  per_zone_hourly?: PerZoneHourlyRow[];
+  hourly_snapshots?: string[];
   national_totals: TotalRow[];
   per_zone_totals: ZoneTotalRow[];
 }

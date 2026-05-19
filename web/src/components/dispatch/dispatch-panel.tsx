@@ -12,7 +12,9 @@ import {
   formatMWh,
   toRechartsStacked,
 } from "@/lib/dispatch-utils";
+import { buildZonePaths } from "@/lib/zone-paths";
 import { StackedAreaChart } from "./stacked-area-chart";
+import { TimeMachine } from "./time-machine";
 import { ZoneMap } from "./zone-map";
 
 interface Props {
@@ -20,12 +22,23 @@ interface Props {
 }
 
 export function DispatchPanel({ bundle }: Props) {
-  const { data, carriers } = toRechartsStacked(bundle.stacked_generation_daily);
+  const hasHourly =
+    (bundle.hourly_snapshots?.length ?? 0) > 0 &&
+    (bundle.per_zone_hourly?.length ?? 0) > 0 &&
+    (bundle.stacked_generation_hourly?.length ?? 0) > 0;
+  // Prefer hourly for the stacked chart when available; falls back to daily.
+  const stackedSource =
+    hasHourly && bundle.stacked_generation_hourly
+      ? bundle.stacked_generation_hourly
+      : bundle.stacked_generation_daily;
+  const { data, carriers } = toRechartsStacked(stackedSource);
   const totalsByMetric = groupByMetric(bundle.national_totals);
   const perZoneMatrix = perZoneMatrixFor(bundle.per_zone_totals);
   const totalLoad = totalsByMetric.load_mwh?.reduce((acc, r) => acc + r.value, 0) ?? 0;
   const totalGen =
     totalsByMetric.generation_mwh?.reduce((acc, r) => acc + r.value, 0) ?? 0;
+  const zonePaths = hasHourly ? buildZonePaths() : null;
+  const chartResolution = hasHourly ? "hour" : "day";
 
   return (
     <section className="space-y-6">
@@ -47,13 +60,31 @@ export function DispatchPanel({ bundle }: Props) {
         </div>
       </header>
 
+      {hasHourly && zonePaths && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Time machine</CardTitle>
+            <CardDescription>
+              Scrub through every hour of the week. The map recolors with
+              each zone&apos;s net balance at that moment; the bars show
+              what&apos;s actually generating. Slider steps every 15
+              minutes (model resolves hourly); keyboard ← / → / Space
+              works once you click the card.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <TimeMachine bundle={bundle} paths={zonePaths} />
+          </CardContent>
+        </Card>
+      )}
+
       <Card>
         <CardHeader>
-          <CardTitle>Zone map — net balance</CardTitle>
+          <CardTitle>Zone map — net balance over the week</CardTitle>
           <CardDescription>
-            The four ÜNB Regelzonen colored by generation minus load.
-            Green = exporter, red = importer, intensity scales with
-            magnitude. Hover a zone for full numbers.
+            The same four ÜNB Regelzonen colored by the WEEK&apos;S net
+            balance (generation minus load summed over all 168 hours).
+            Green = exporter, red = importer.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,11 +94,15 @@ export function DispatchPanel({ bundle }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle>Daily generation by carrier</CardTitle>
+          <CardTitle>
+            {chartResolution === "hour"
+              ? "Hourly generation by carrier"
+              : "Daily generation by carrier"}
+          </CardTitle>
           <CardDescription>
-            Stacked daily totals across all four ÜNB zones. Carriers contributing
-            less than 0.1 MWh over the horizon are hidden to keep the legend
-            readable.
+            Stacked {chartResolution === "hour" ? "hourly" : "daily"} totals
+            across all four ÜNB zones. Carriers contributing less than 0.1
+            MWh over the horizon are hidden to keep the legend readable.
           </CardDescription>
         </CardHeader>
         <CardContent>
