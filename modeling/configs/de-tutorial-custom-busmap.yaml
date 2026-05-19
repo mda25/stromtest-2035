@@ -75,7 +75,10 @@ clustering:
   mode: custom_busmap
   exclude_carriers: ["OCGT", "offwind-ac", "coal"]
   temporal:
-    resolution_elec: 24h
+    # Hourly so the dispatch JSON has real per-hour structure for the
+    # frontend's time slider. 24h is the PyPSA-Eur tutorial default but
+    # loses all intra-day detail.
+    resolution_elec: 1h
 
 lines:
   dynamic_line_rating:
