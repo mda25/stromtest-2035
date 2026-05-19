@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { DispatchPanel } from "@/components/dispatch/dispatch-panel";
-import { loadDispatchForFamily } from "@/lib/dispatch";
+import { loadAllYearsForFamily } from "@/lib/dispatch";
 import {
   type ScenarioFile,
   type ZoneCapacities,
@@ -13,6 +13,8 @@ import {
   loadAllScenarios,
   zoneSum,
 } from "@/lib/scenarios";
+import { WEATHER_YEAR_CATALOG } from "@/lib/weather-years";
+import { buildZonePaths } from "@/lib/zone-paths";
 
 export const dynamicParams = false;
 
@@ -32,7 +34,9 @@ export default async function ScenarioFamilyPage({ params }: Props) {
   if (files.length === 0) notFound();
   const latest = files[0];
   const s = latest.scenario;
-  const dispatch = loadDispatchForFamily(family);
+  const dispatchBundles = loadAllYearsForFamily(family);
+  const hasDispatch = dispatchBundles.length > 0;
+  const zonePaths = hasDispatch ? buildZonePaths() : null;
   const c = s.capacities_2035_gw;
   const totalRenewable =
     zoneSum(c.wind_onshore) + zoneSum(c.wind_offshore) + zoneSum(c.solar_pv);
@@ -49,7 +53,7 @@ export default async function ScenarioFamilyPage({ params }: Props) {
           <Badge variant="outline">
             {files.length} version{files.length === 1 ? "" : "s"} committed
           </Badge>
-          {dispatch && (
+          {hasDispatch && (
             <Badge variant="outline" className="bg-primary/10 text-primary">
               Dispatch available
             </Badge>
@@ -70,9 +74,13 @@ export default async function ScenarioFamilyPage({ params }: Props) {
 
       <DemandRow file={latest} />
 
-      {dispatch ? (
+      {hasDispatch && zonePaths ? (
         <section className="mt-16">
-          <DispatchPanel bundle={dispatch} />
+          <DispatchPanel
+            bundles={dispatchBundles}
+            paths={zonePaths}
+            catalog={WEATHER_YEAR_CATALOG}
+          />
         </section>
       ) : (
         <NoDispatchCard family={family} />
@@ -260,9 +268,11 @@ function NoDispatchCard({ family }: { family: string }) {
           </code>{" "}
           to populate{" "}
           <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
-            web/src/data/dispatch/{family}.json
+            web/src/data/dispatch/{family}.&lt;weather-year&gt;.json
           </code>
-          . The dispatch panel will populate automatically.
+          . The dispatch panel will populate automatically — and the
+          weather-year selector will switch that year from{" "}
+          <em>pending</em> to active.
         </p>
       </div>
     </section>

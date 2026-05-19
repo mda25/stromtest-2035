@@ -502,11 +502,32 @@ function parseHex(hex: string): [number, number, number] {
   ];
 }
 
+const MONTH_ABBR = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 function formatTimestamp(isoHour: string, minuteOffset: number): string {
   // ISO is "YYYY-MM-DDTHH:MM"; bump minutes by offset (0/15/30/45).
+  // Year is intentionally dropped — the panel header already pins the
+  // weather year; surfacing it inside every slider stamp confuses
+  // readers into thinking the simulation year is historical.
   if (!isoHour) return "";
   const [date, hm] = isoHour.split("T");
+  const [, monthStr, dayStr] = date.split("-");
+  const monthIdx = Math.max(0, Math.min(11, parseInt(monthStr, 10) - 1));
+  const day = parseInt(dayStr, 10);
   const [hour] = (hm ?? "00:00").split(":");
   const minutes = minuteOffset.toString().padStart(2, "0");
-  return `${date} · ${hour}:${minutes}`;
+  return `${MONTH_ABBR[monthIdx]} ${day} · ${hour}:${minutes}`;
 }
