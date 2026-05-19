@@ -254,26 +254,44 @@ function DemandRow({ file }: { file: ScenarioFile }) {
 function NoDispatchCard({ family }: { family: string }) {
   return (
     <section className="mb-16">
-      <SectionTitle eyebrow="04 · Dispatch" title="No solved run yet" />
-      <div className="rounded-2xl border border-dashed border-border/80 bg-card/30 p-6 md:p-8">
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          No solved dispatch committed for this scenario yet. Run the
-          PyPSA-Eur pipeline plus capacity injection (see{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
-            modeling/RUNBOOK.md
-          </code>{" "}
-          smoke test 4), then{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
-            bin/build_dispatch_json.py
-          </code>{" "}
-          to populate{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
-            web/src/data/dispatch/{family}.&lt;weather-year&gt;.json
-          </code>
-          . The dispatch panel will populate automatically — and the
-          weather-year selector will switch that year from{" "}
-          <em>pending</em> to active.
+      <SectionTitle
+        eyebrow="04 · Dispatch"
+        title="Hourly dispatch — on the roadmap"
+      />
+      <div className="space-y-4 rounded-2xl border border-dashed border-border/80 bg-card/30 p-6 md:p-8">
+        <p className="text-sm leading-relaxed text-foreground/85">
+          This scenario&apos;s capacity, demand, and storage commitments
+          are fully committed and cited above. The hour-by-hour
+          PyPSA-Eur dispatch under historical weather years has not yet
+          been solved for this scenario — that&apos;s the next step on
+          the roadmap, and solving it under the same weather years as
+          the operative plan is what will turn this from a structural
+          comparison into a behavioral one.
         </p>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          The structural diff against the operative plan — capacities,
+          storage, demand, electrification share — is already covered
+          on the comparison page.
+        </p>
+        <div className="flex flex-wrap gap-3 pt-1">
+          <Link
+            href="/scenarios/compare"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            See the structural comparison →
+          </Link>
+          <details className="rounded-full border border-border bg-background/60 px-4 py-2 text-xs text-muted-foreground">
+            <summary className="cursor-pointer">For engineers</summary>
+            <p className="mt-2 leading-relaxed">
+              Run <code>modeling/RUNBOOK.md</code> smoke test 4 against
+              the {family} scenario, then{" "}
+              <code>bin/build_dispatch_json.py</code> writes{" "}
+              <code>web/src/data/dispatch/{family}.&lt;year&gt;.json</code>
+              . The dispatch panel + weather-year selector will pick it
+              up automatically.
+            </p>
+          </details>
+        </div>
       </div>
     </section>
   );

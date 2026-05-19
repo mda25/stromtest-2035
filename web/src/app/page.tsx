@@ -1,12 +1,17 @@
 import Link from "next/link";
 import { ZoneMap } from "@/components/dispatch/zone-map";
 import { loadDispatchForFamily } from "@/lib/dispatch";
-import { loadAllScenarios, zoneSum } from "@/lib/scenarios";
+import {
+  type ScenarioFile,
+  loadAllScenarios,
+  zoneSum,
+} from "@/lib/scenarios";
 
 export default function Home() {
   const scenarios = loadAllScenarios();
   const reicheDispatch = loadDispatchForFamily("reiche");
-  const reicheScenario = scenarios.find((s) => s.family === "reiche")?.scenario;
+  const reiche = scenarios.find((s) => s.family === "reiche");
+  const habeck = scenarios.find((s) => s.family === "habeck");
 
   // Headline stats.
   const totalSources = scenarios.reduce(
@@ -21,15 +26,11 @@ export default function Home() {
         scenarioCount={scenarios.length}
         sourceCount={totalSources}
       />
+      {reiche && habeck && (
+        <ComparisonAtAGlance reiche={reiche} habeck={habeck} />
+      )}
       <HowItWorks />
       <FeaturedScenarios />
-      {reicheScenario && (
-        <SignatureContribution
-          windOnshore={zoneSum(reicheScenario.capacities_2035_gw.wind_onshore)}
-          solarPv={zoneSum(reicheScenario.capacities_2035_gw.solar_pv)}
-          gasBackup={zoneSum(reicheScenario.capacities_2035_gw.gas_backup)}
-        />
-      )}
     </>
   );
 }
@@ -44,28 +45,35 @@ function Hero({
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1.3fr_1fr] md:items-center md:py-28 lg:py-32">
         <div className="space-y-8">
           <div className="space-y-3">
-            <p className="eyebrow">Public energy stress-test · Germany 2035</p>
+            <p className="eyebrow">Public energy stress-test · Reiche vs. Habeck 2035</p>
             <h1 className="display-1 text-balance">
-              What happens to{" "}
-              <span className="text-primary">Germany&apos;s energy plan</span>{" "}
-              when the weather doesn&apos;t cooperate?
+              The Bundesregierung&apos;s plan has{" "}
+              <span className="text-primary">less storage</span>, more gas, and
+              slower electrification than its predecessor.
             </h1>
           </div>
 
           <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-            An open public stress-test of the Bundesregierung&apos;s plan
-            against historical weather years. Built on PyPSA-Eur. Every
-            assumption sourced. The first public translation of the
-            currently-evolving Reiche plan into runnable numbers.
+            An open, sourced comparison of the Reiche-era 2035 fleet against
+            the Habeck-era Klimaneutralität 2045 trajectory. Built on
+            PyPSA-Eur. Every capacity, demand assumption, and storage figure
+            traces to a citable document — and the inferred system-level
+            consequences are clearly labeled.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/scenarios"
+              href="/scenarios/compare"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow"
             >
-              View scenarios
+              Compare the plans
               <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/scenarios"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+            >
+              View scenarios
             </Link>
             <Link
               href="/methodology"
@@ -278,104 +286,163 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SignatureContribution({
-  windOnshore,
-  solarPv,
-  gasBackup,
+function ComparisonAtAGlance({
+  reiche,
+  habeck,
 }: {
-  windOnshore: number;
-  solarPv: number;
-  gasBackup: number;
+  reiche: ScenarioFile;
+  habeck: ScenarioFile;
 }) {
+  const rc = reiche.scenario.capacities_2035_gw;
+  const hc = habeck.scenario.capacities_2035_gw;
+  const rd = reiche.scenario.demand_2035;
+  const hd = habeck.scenario.demand_2035;
+
+  const reicheGas = zoneSum(rc.gas_backup);
+  const habeckGas = zoneSum(hc.gas_backup);
+  const reicheElectrolyzer = zoneSum(rc.hydrogen_electrolyzer);
+  const habeckElectrolyzer = zoneSum(hc.hydrogen_electrolyzer);
+  const reicheBattery = rc.battery_storage_gwh.value;
+  const habeckBattery = hc.battery_storage_gwh.value;
+
+  const deltas: ComparisonDelta[] = [
+    {
+      label: "Gas backup",
+      reicheValue: `${reicheGas.toFixed(0)} GW`,
+      habeckValue: `${habeckGas.toFixed(0)} GW`,
+      gapText: signedPct(reicheGas, habeckGas),
+      worse: reicheGas > habeckGas,
+      caption: "Kraftwerksstrategie 2026-01",
+    },
+    {
+      label: "H₂ electrolyzer",
+      reicheValue: `${reicheElectrolyzer.toFixed(0)} GW`,
+      habeckValue: `${habeckElectrolyzer.toFixed(0)} GW`,
+      gapText: signedPct(reicheElectrolyzer, habeckElectrolyzer),
+      worse: reicheElectrolyzer < habeckElectrolyzer,
+      caption: "NWS Fortschreibung trajectory",
+    },
+    {
+      label: "Battery storage",
+      reicheValue: `${reicheBattery.toFixed(0)} GWh`,
+      habeckValue: `${habeckBattery.toFixed(0)} GWh`,
+      gapText: signedPct(reicheBattery, habeckBattery),
+      worse: reicheBattery < habeckBattery,
+      caption: "NEP-2037-V2025 vs. Agora KNStrom2035",
+    },
+    {
+      label: "Heat-pump share",
+      reicheValue: `${(rd.heat_pump_share * 100).toFixed(0)} %`,
+      habeckValue: `${(hd.heat_pump_share * 100).toFixed(0)} %`,
+      gapText: `${rd.heat_pump_share < hd.heat_pump_share ? "−" : "+"}${Math.abs(
+        (rd.heat_pump_share - hd.heat_pump_share) * 100,
+      ).toFixed(0)} pp`,
+      worse: rd.heat_pump_share < hd.heat_pump_share,
+      caption: "Building heat electrification share",
+    },
+  ];
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
         <div className="space-y-4">
-          <p className="eyebrow">Signature contribution</p>
+          <p className="eyebrow">At a glance</p>
           <h2 className="display-2 text-balance">
-            Reiche&apos;s plan, in numbers nobody else is running publicly.
+            Four numbers that{" "}
+            <span className="text-primary">summarize the shift</span>.
           </h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            The Bundesregierung&apos;s plan under Federal Minister Reiche is
-            being shaped in real time. There&apos;s no other public, citable
-            tool that translates her statements into a runnable 2035 fleet.
-            stromtest-2035 is that tool.
+            Each tile shows the Reiche-era 2035 target alongside the
+            Habeck-era one, plus the gap. Capacities and demand figures
+            trace to the citation refs shown below each tile and on the
+            scenario pages.
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Every number traces to BMWE press releases, Koalitionsvertrag
-            clauses, NEP 2037 V2025 tables, or NWS Fortschreibung updates.
-            When Reiche restates a position, the scenario gets a new dated
-            version. The model re-runs. The dispatch updates. The tool ages
-            with the plan.
+            On gas backup, Reiche doubles. On batteries, electrolyzers,
+            and electrification, Reiche cuts. The full table — plus
+            inferred system-level consequences (clearly labeled as
+            assumptions) — lives on the comparison page.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
-              href="/scenarios/reiche"
+              href="/scenarios/compare"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              See the Reiche scenario →
+              See the full comparison →
             </Link>
             <Link
-              href="/scenarios/compare"
+              href="/scenarios/reiche"
               className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
             >
-              Compare against Habeck
+              Reiche detail
+            </Link>
+            <Link
+              href="/scenarios/habeck"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+            >
+              Habeck detail
             </Link>
           </div>
         </div>
 
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60">
-          <BigStat
-            label="Wind onshore"
-            value={`${windOnshore.toFixed(0)} GW`}
-            sublabel="EEG-2023 trajectory"
-          />
-          <BigStat
-            label="Solar PV"
-            value={`${solarPv.toFixed(0)} GW`}
-            sublabel="EEG + Reiche tempering"
-          />
-          <BigStat
-            label="Gas backup"
-            value={`${gasBackup.toFixed(0)} GW`}
-            sublabel="Kraftwerksstrategie 2026-01"
-            accent
-          />
-          <BigStat
-            label="Wind offshore"
-            value="40 GW"
-            sublabel="WindSeeG § 1 (statutory)"
-          />
+          {deltas.map((d) => (
+            <DeltaCell key={d.label} delta={d} />
+          ))}
         </dl>
       </div>
     </section>
   );
 }
 
-function BigStat({
-  label,
-  value,
-  sublabel,
-  accent,
-}: {
+interface ComparisonDelta {
   label: string;
-  value: string;
-  sublabel: string;
-  accent?: boolean;
-}) {
+  reicheValue: string;
+  habeckValue: string;
+  gapText: string;
+  worse: boolean;
+  caption: string;
+}
+
+function DeltaCell({ delta }: { delta: ComparisonDelta }) {
   return (
     <div
-      className={`bg-card p-6 md:p-8 ${accent ? "ring-1 ring-inset ring-primary/20" : ""}`}
+      className={`bg-card p-6 md:p-8 ${
+        delta.worse ? "ring-1 ring-inset ring-rose-500/30" : ""
+      }`}
     >
       <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
-        {label}
+        {delta.label}
       </p>
       <p
-        className={`mt-3 font-mono text-3xl tabular-nums tracking-tight md:text-4xl ${accent ? "text-primary" : ""}`}
+        className={`mt-3 font-mono text-3xl tabular-nums tracking-tight md:text-4xl ${
+          delta.worse ? "text-rose-700 dark:text-rose-400" : "text-foreground"
+        }`}
       >
-        {value}
+        {delta.gapText}
       </p>
-      <p className="mt-2 text-xs text-muted-foreground">{sublabel}</p>
+      <dl className="mt-4 grid grid-cols-2 gap-3 border-t border-border/40 pt-3 text-xs">
+        <div>
+          <dt className="text-muted-foreground">Reiche</dt>
+          <dd className="mt-1 font-mono tabular-nums text-foreground">
+            {delta.reicheValue}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground">Habeck</dt>
+          <dd className="mt-1 font-mono tabular-nums text-foreground">
+            {delta.habeckValue}
+          </dd>
+        </div>
+      </dl>
+      <p className="mt-3 text-xs text-muted-foreground">{delta.caption}</p>
     </div>
   );
+}
+
+function signedPct(reiche: number, habeck: number): string {
+  if (habeck === 0) return "—";
+  const pct = ((reiche - habeck) / habeck) * 100;
+  const sign = pct >= 0 ? "+" : "−";
+  return `${sign}${Math.abs(pct).toFixed(0)}%`;
 }
