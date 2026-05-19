@@ -4,7 +4,9 @@
 Reads a solved network, runs ``stromtest.aggregate`` to produce
 hourly/daily/weekly Parquet, then emits a single JSON file
 co-located with the frontend at
-``web/src/data/dispatch/<scenario_id>.json``.
+``web/src/data/dispatch/<scenario_id>.<weather_year>.json``. The
+frontend's weather-year selector then enumerates every committed
+year for a scenario family.
 
 Usage:
     pixi run python ../bin/build_dispatch_json.py \\
@@ -48,13 +50,13 @@ def main() -> int:
         "--out",
         type=Path,
         default=None,
-        help="Override output JSON path. Defaults to web/src/data/dispatch/<scenario_id>.json",
+        help="Override output JSON path. Defaults to web/src/data/dispatch/<scenario_id>.<weather_year>.json",
     )
     args = parser.parse_args()
 
     from stromtest.aggregate import aggregate
 
-    out_path = args.out or DISPATCH_DIR / f"{args.scenario_id}.json"
+    out_path = args.out or DISPATCH_DIR / f"{args.scenario_id}.{args.weather_year}.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     with tempfile.TemporaryDirectory() as tmp:

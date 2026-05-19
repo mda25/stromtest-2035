@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -12,21 +15,64 @@ import {
   formatMWh,
   toRechartsStacked,
 } from "@/lib/dispatch-utils";
-import { buildZonePaths } from "@/lib/zone-paths";
+import type { ZonePathBundle } from "@/lib/zone-paths";
+import { WEATHER_YEAR_CATALOG, type WeatherYearMeta } from "@/lib/weather-years";
 import { StackedAreaChart } from "./stacked-area-chart";
 import { TimeMachine } from "./time-machine";
+import { WeatherYearSelector } from "./weather-year-selector";
 import { ZoneMap } from "./zone-map";
 
-interface Props {
+export interface DispatchYearBundle {
+  family: string;
+  year: number;
   bundle: DispatchBundle;
 }
 
-export function DispatchPanel({ bundle }: Props) {
+interface Props {
+  /** All committed (family, year) dispatch bundles for this scenario. */
+  bundles: DispatchYearBundle[];
+  /** Server-projected SVG paths for the four ÜNB Regelzonen. */
+  paths: ZonePathBundle;
+  /** Optional catalog override; defaults to WEATHER_YEAR_CATALOG. */
+  catalog?: WeatherYearMeta[];
+}
+
+/**
+ * Top-level dispatch panel.
+ *
+ * Holds the active weather-year state. The page passes in every
+ * committed (family, year) bundle plus the full year catalog; the user
+ * picks a year from the segmented control, the panel re-renders with
+ * that year's bundle.
+ *
+ * The fleet (capacities, demand, network topology) is fixed to 2035 —
+ * only the WEATHER input changes across years, because PyPSA-Eur drives
+ * renewables from ERA5 historical reanalysis. The header copy makes
+ * this distinction explicit so viewers don't mistake the year stamps
+ * on the slider for the simulation year.
+ */
+export function DispatchPanel({
+  bundles,
+  paths,
+  catalog = WEATHER_YEAR_CATALOG,
+}: Props) {
+  const availableYears = useMemo(
+    () => bundles.map((b) => b.year).sort((a, b) => a - b),
+    [bundles],
+  );
+  const [activeYear, setActiveYear] = useState<number>(() => {
+    if (availableYears.length === 0) return 0;
+    return availableYears[availableYears.length - 1];
+  });
+  const active = bundles.find((b) => b.year === activeYear) ?? bundles[0];
+  if (!active) return null;
+  const bundle = active.bundle;
+  const activeMeta = catalog.find((c) => c.year === active.year);
+
   const hasHourly =
     (bundle.hourly_snapshots?.length ?? 0) > 0 &&
     (bundle.per_zone_hourly?.length ?? 0) > 0 &&
     (bundle.stacked_generation_hourly?.length ?? 0) > 0;
-  // Prefer hourly for the stacked chart when available; falls back to daily.
   const stackedSource =
     hasHourly && bundle.stacked_generation_hourly
       ? bundle.stacked_generation_hourly
@@ -34,33 +80,48 @@ export function DispatchPanel({ bundle }: Props) {
   const { data, carriers } = toRechartsStacked(stackedSource);
   const totalsByMetric = groupByMetric(bundle.national_totals);
   const perZoneMatrix = perZoneMatrixFor(bundle.per_zone_totals);
-  const totalLoad = totalsByMetric.load_mwh?.reduce((acc, r) => acc + r.value, 0) ?? 0;
+  const totalLoad =
+    totalsByMetric.load_mwh?.reduce((acc, r) => acc + r.value, 0) ?? 0;
   const totalGen =
     totalsByMetric.generation_mwh?.reduce((acc, r) => acc + r.value, 0) ?? 0;
-  const zonePaths = hasHourly ? buildZonePaths() : null;
   const chartResolution = hasHourly ? "hour" : "day";
 
   return (
     <section className="space-y-6">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-2xl font-semibold tracking-tight">Dispatch</h2>
-          <p className="text-sm text-muted-foreground">
-            {bundle.label}
-          </p>
+      <header className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight">Dispatch</h2>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              <span className="font-medium text-foreground">
+                2035 fleet · weather sampled from {active.year}
+              </span>
+              {activeMeta ? ` — ${activeMeta.label}.` : "."} Capacities and
+              demand are pinned to the scenario above. Wind / solar / hydro
+              traces come from ERA5 reanalysis, which only covers historical
+              years — that&apos;s why the slider stamps a {active.year} date.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs">
+            <Badge variant="outline">
+              {bundle.scenario_id}@{bundle.scenario_version}
+            </Badge>
+            <Badge variant="outline">weather year {bundle.weather_year}</Badge>
+            <Badge variant="outline">
+              {bundle.metadata.n_snapshots ?? "?"} snapshots
+            </Badge>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2 text-xs">
-          <Badge variant="outline">
-            {bundle.scenario_id}@{bundle.scenario_version}
-          </Badge>
-          <Badge variant="outline">weather year {bundle.weather_year}</Badge>
-          <Badge variant="outline">
-            {bundle.metadata.n_snapshots ?? "?"} snapshots
-          </Badge>
-        </div>
+
+        <WeatherYearSelector
+          availableYears={availableYears}
+          catalog={catalog}
+          activeYear={active.year}
+          onSelect={setActiveYear}
+        />
       </header>
 
-      {hasHourly && zonePaths && (
+      {hasHourly && (
         <Card>
           <CardHeader>
             <CardTitle>Time machine</CardTitle>
@@ -73,7 +134,7 @@ export function DispatchPanel({ bundle }: Props) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <TimeMachine bundle={bundle} paths={zonePaths} />
+            <TimeMachine bundle={bundle} paths={paths} />
           </CardContent>
         </Card>
       )}
@@ -212,7 +273,7 @@ export function DispatchPanel({ bundle }: Props) {
       <p className="text-xs text-muted-foreground">
         Raw daily Parquet committed alongside the JSON at{" "}
         <code className="rounded bg-muted px-1.5 py-0.5">
-          web/src/data/dispatch/{bundle.scenario_id}.daily.parquet
+          web/src/data/dispatch/{bundle.scenario_id}.{bundle.weather_year}.daily.parquet
         </code>{" "}
         for downstream analysis. Bundled into the build output but not
         served as a static asset — clone the repo to access it.
