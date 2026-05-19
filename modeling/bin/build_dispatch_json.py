@@ -96,9 +96,7 @@ def _build_payload(result, args) -> dict:
 
     # Hourly snapshots — full ISO timestamps, sorted.
     hourly = hourly.sort_values(["snapshot", "zone", "technology", "metric"]).copy()
-    hourly["snapshot"] = pd.to_datetime(hourly["snapshot"]).dt.strftime(
-        "%Y-%m-%dT%H:%M"
-    )
+    hourly["snapshot"] = pd.to_datetime(hourly["snapshot"]).dt.strftime("%Y-%m-%dT%H:%M")
 
     # National totals per (metric, technology) — for headline tables.
     nat = (
